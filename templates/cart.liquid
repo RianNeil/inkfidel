@@ -1,0 +1,179 @@
+<!-- BeginApplePayLiquid -->{% if additional_checkout_buttons == false %}{% assign additional_checkout_buttons = true %}{% endif %}{% capture content_for_additional_checkout_buttons %}<img id="applePayButton" style="display: none" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" onload="typeof createApplyPayButton === 'function' ? createApplyPayButton(this) : window.addEventListener('applePayReady', (function(){createApplyPayButton(this)}).bind(this))" />{{content_for_additional_checkout_buttons}}{% endcapture %}<!-- EndApplePayLiquid -->
+
+<!-- spurit_po-added -->
+{% include 'spurit_po-cart-snippet' %}
+<!-- /spurit_po-added -->
+<h2>My Duffle Bag</h2>
+{% if cart.item_count == 0 %}
+    <p>Your Duffle Bag is currently empty.</p>
+
+<script type="text/javascript">
+var google_tag_params = {
+ecomm_prodid: 'shopify_US_{{ product.id }}_{{ product.variants.first.id }}'
+ecomm_pagetype: 'shopify_US_{{ cart }}'
+ecomm_totalvalue: 'shopify_US_{{ product.price_min | money_without_currency }}'
+};
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 956104739;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/956104739/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+
+{% else %}
+<script type="text/javascript">
+  function remove_item(id) {
+      document.getElementById('updates_'+id).value = 0;
+      document.getElementById('cartform').submit();
+  }
+</script>
+
+<div class="buyx-msg"></div>
+{% include 'buyx-cart' %}
+
+<form action="/cart" method="post" id="cartform">
+     <input type="hidden" name="discount" id="discount" value="" />
+
+	<table id="basket">
+    <thead>
+	    <tr>
+			<th>Item Title</th>
+			<th>Price</th>
+			<th style="text-align: center">Qty</th>
+			<th>Delete</th>
+			<th>Total</th>
+		</tr>
+    </thead>
+    <tbody>
+    {% for item in cart.items %}
+        {% include 'saw_compute_discount' with item.product %}
+        {% include 'saw_variant' with item.variant %}
+		<tr>
+			<td>
+				<p><a href="{{ item.product.url }}">{{ item.title| remove: ' / Default' | remove: 'Default'  }}</a></p>
+			</td>
+			<td><p>
+              
+              {% if saw_discount == 1 %}
+	          {{ item.price | money }}{% if item.variant.compare_at_price > item.price %}<br /><del>{{ item.variant.compare_at_price | money }}</del>{% endif %}
+              {% else %}
+                  {{ saw_variant_price | money }}<br>
+                  <del>{{ saw_variant_compare_at_price | money }}</del>
+
+                  <!-- line_price:
+                {{saw_variant_price | times: item.quantity | money }}<br>
+		<del>{{ saw_variant_compare_at_price  | times: item.quantity | money }}</del>
+                  -->
+              {% endif %} 
+
+              </p></td>
+			<td><input type="text" size="4" name="updates[{{ item.id }}]" id="updates_{{ item.variant.id }}" value="{{ item.quantity }}" onfocus="this.select();"
+                       
+{% unless item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %} max="{{ item.variant.inventory_quantity }}" {% endunless %}
+/></td>
+			<td><a href="#" onclick="remove_item({{ item.variant.id }}); return false;">Remove</a></td>
+			<td>
+              
+              {% if saw_discount == 1 %}
+	          {{ item.line_price | money }}   
+              {% else %}
+                {{saw_variant_price | times: item.quantity | money }}<br>
+		<del>{{ saw_variant_compare_at_price  | times: item.quantity | money }}</del>
+              {% endif %} 
+
+              </td>
+		</tr>{% endfor %}
+    </tbody>
+	</table>
+	<div id="basket-right">
+		<h3>Subtotal <span class="saw-cart-original-total">{{ cart.total_price | money }}</span><br>
+<span class="saw-cart-total"></span></h3>
+      
+<div style="text-align: right;">
+	<span class="saw-discount-info "></span>
+  	<span class="saw-extra-note "></span>
+</div>
+        <input type="submit" name="update" id="update-cart" value="Update" class="styled-button" />
+        <input type="submit" name="checkout" id="checkout" value="Secure Checkout" class="styled-button" />
+        <div class="clear"></div>
+      
+{% if customer.tags contains 'Wholesale' or customer.tags contains 'wholesale' %}
+{% else %}
+        {{ content_for_additional_checkout_buttons }}
+{% endif %}
+
+
+	</div>  
+  
+
+
+</form>{% endif %}
+{% if settings.show_recent_products %}
+{% include 'recently-viewed' %}
+{% endif %}
+
+
+
+<script>
+  function SAWOrderNote(note) {
+	note = note.replace(/something to change/gi, "");
+ 	return note
+  }
+</script>
+ 
+{% include 'saw_cart' %}
+
+<script>
+  if (typeof BuyXSubmit == "function") {
+    var buyx_checkout_selectors = ["input[name='checkout']", "button[name='checkout']", "input[name='goto_pp']", "button[name='goto_pp']", "input[name='goto_gc']", "button[name='goto_gc']", "[href$='checkout']"];
+    window.buyx_cart_global = {{ cart | json }}
+    buyx_checkout_selectors.forEach(function(selector) {
+        jQuery(selector).bind("click", function() {
+          console.log("click")
+            return BuyXSubmit(window.buyx_cart_global, "#updates_{variant_id}");
+        })
+    });
+  }
+/*use appropriate selector for your theme, e.g.
+      return BuyXSubmit({{cart | json}}, "input[data-id={variant_id}]");
+*/
+</script>
+
+
+
+<script>
+    jQuery('[max]').change(function() {
+      var max = parseInt(jQuery(this).attr('max'), 10) || 10000;
+      var value = parseInt(jQuery(this).val(), 10) || 0;
+      if (value > max) { jQuery(this).val(max); }
+    });
+    /* change won't trigger on initial load */
+    jQuery('[max]').each(function() {
+      var max = parseInt(jQuery(this).attr('max'), 10) || 10000;
+      var value = parseInt(jQuery(this).val(), 10) || 0;
+      if (value > max) { jQuery(this).val(max); }
+    });
+  if (typeof BuyXSubmit == "function") {
+    var buyx_checkout_selectors = ["input[name='checkout']", "button[name='checkout']", "input[name='goto_pp']", "button[name='goto_pp']", "input[name='goto_gc']", "button[name='goto_gc']", "[href$='checkout']", ".google-wallet-button-holder"];
+    window.buyx_cart_global = {{ cart | json }}
+    buyx_checkout_selectors.forEach(function(selector) {
+        jQuery(selector).bind("click", function() {
+          console.log("click")
+            return BuyXSubmit(window.buyx_cart_global, "#updates_{variant_id}");
+            //use appropriate selector for your theme, e.g. "input[data-id={variant_id}]"
+        })
+    });
+  }
+</script>
+
+

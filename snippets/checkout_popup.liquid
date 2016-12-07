@@ -1,0 +1,97 @@
+<!-- Add content to the popup -->
+<div id="my_popup" style="display: none;">
+
+  {% for tag in product.tags %}
+      {% if tag contains 'backorder'%}
+        <p>This product is on backorder</p>
+        <p>Your order will not be shipped until: {{ tag | remove: 'backorder-' }}</p>
+      {%endif%}
+    {%endfor%}
+
+  <!-- Add an optional button to close the popup -->
+  <button class="my_popup_button my_popup_continue">Continue Shopping</button>
+  <button class="my_popup_button my_popup_close">Roger That</button>
+  
+</div>
+
+<style> 
+  .template-cart #my_popup {
+      background-color: #fff;
+      padding: 2rem;
+      text-align: center !important;
+      margin: 5%;
+  }
+
+  .template-cart #my_popup p {
+      margin-bottom: 1%;
+   	  color: #000;
+  }
+
+  .template-cart #my_popup button {
+      border: none;
+      padding: 1rem 2rem;
+      background-color: #1FC11F;
+      color: #FFF;
+      font-size: 1.5rem;
+  }
+
+  .template-cart #my_popup button:hover {
+      opacity: .8;  
+  }  
+  
+  div#my_popup {
+    background: white;
+    padding: 30px;
+  }
+  
+  
+  .my_popup_button{
+    display: inline-block;
+  }
+  
+  .my_popup_continue{
+  	background: rgb(0, 171, 238);
+  }
+  
+</style>
+
+<script>
+  $(document).ready(function() {
+
+      // Initialize the plugin
+      $('#my_popup').popup();
+
+      var $checkout_button = $('#add');   
+      var checkout_button = document.getElementById('add');     
+      var my_popup_background = document.getElementById('my_popup_background');     
+      var my_popup_wrapper = document.getElementById('my_popup_wrapper');     
+      var my_popup = document.getElementById('my_popup');     
+    
+    
+      // Remove open popup class and auto click checkout
+      $('.my_popup_close').on('click', function() {        	
+          $checkout_button.removeClass('my_popup_open');
+          $checkout_button.click();
+      });
+    
+      $('.my_popup_continue').on('click', function() {   
+        console.log('hiding');
+          $checkout_button.addClass('my_popup_open');
+          my_popup_wrapper.style.display = 'none'; 
+          my_popup_background.style.display = 'none';
+          my_popup.style.display = 'none'; 
+          checkout_button.style.display = 'inline-block'; 
+      });
+    
+      $('#add').on('click', function() {   
+        if($( "#add" ).hasClass( "my_popup_open" )){
+          console.log('showing');
+          my_popup_wrapper.style.display = 'block'; 
+          my_popup_background.style.display = 'block';
+          my_popup.style.display = 'inline-block'; 
+        }
+      });
+    
+
+  });
+</script>

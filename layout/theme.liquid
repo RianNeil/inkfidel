@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+  <script type="text/javascript">
+(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/hWGkt6tPjuxBYGgeVqe3YUpfvlJteWKbRtDICMjL/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+</script>
+  
+  <!--- Fav Icon --->
+  
+  <link rel="shortcut icon" href="{{ 'Inkfidel_Logo.png' | asset_url }}" type="image/png" >
+  
+  <meta name="google-site-verification" content="VZSYY7Ue7MXxY7DI246FyP1B9EaOZ0h1WMJf5DLZfa4" />
+
+<!---Bing Verification for Pete Bell--->
+<meta name="msvalidate.01" content="215EE03FB18B854CEFDA8F3183D18345" />
+  
+  
+  <!-- Google Web Fonts
+  ================================================== -->
+
+   <link href='//fonts.googleapis.com/css?family=Droid+Sans|Arvo|Playfair+Display|Lora|PT+Sans+Narrow|Ubuntu|PT+Serif|Lobster|Rokkitt|Copse|Antic|Dynalight|Droid+Serif|Open+Sans|Raleway:300|Bentham|Playball|Merriweather|Oswald' rel='stylesheet' type='text/css'>
+    
+    <!-- Basic Page Needs
+  ================================================== -->
+    
+  <title>{{ page_title }} | {{ shop.name }}  {% if template == '404' %}404 Error{% endif %}</title>
+    
+    {% assign maxmeta = 155 %}
+    {% if template contains 'product' %}
+  	 <meta name="keywords" content="funny military shirts, humorous military shirts, parody military shirts, vintage military shirts, funny military stickers, funny military decals, 7.62 shirts, 7.62 t shirts, funny army shirts, funny marine shirts, funny usmc shirts, parody usmc shirts, funny usmc stickers, funny navy decals, funny usmc decals, humorous army decals, humorous army shirts, humorous miliatary decals">
+     <meta name="description" content="{{ product.description | strip_html | strip_newlines | truncate: maxmeta | escape }}" />
+    {% elsif template contains 'page' %}
+      <meta name="description" content="{{ page.content | strip_html | strip_newlines | truncate: maxmeta | escape }}" />
+    {% elsif template == 'index' and shop.description != '' %}
+      <meta name="description" content="{{ shop.description | strip_html | strip_newlines | truncate: maxmeta | escape}}" />
+    {% endif %}
+	<link rel="canonical" href="{{ canonical_url }}" />
+  	{% if template != 'product' %} 
+ 	<a href="https://plus.google.com/100451324000263022606" rel="publisher"></a>
+  	{% endif %}
+
+    <!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+  ================================================== -->
+	{{ 'base.css' | asset_url | stylesheet_tag }}
+	{{ 'skeleton.css' | asset_url | stylesheet_tag }}
+	{{ 'layout.css' | asset_url | stylesheet_tag }}
+    {{ 'stylesheet.css' | asset_url | stylesheet_tag }}
+    {{ 'flexslider.css' | asset_url | stylesheet_tag }}
+    {{ 'colorbox.css' | asset_url | stylesheet_tag }}
+    {{ 'chosen.css' | asset_url | stylesheet_tag }}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
+  	{{ 'custom.scss' | asset_url | stylesheet_tag }}
+  
+  <!-- Font-Awesome 
+  ================================================== -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+
+    <!--[if IE 7]>
+    {{ 'ie7.css' | asset_url | stylesheet_tag }}
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    
+    <!-- JS
+    
+    ================================================= -->
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+
+    {{ 'theme.js' | asset_url | script_tag }}
+    {{ 'jquery.colorbox.js' | asset_url | script_tag }}
+    {{ 'chosen.jquery.js' | asset_url | script_tag }}
+    {{ 'jquery.popupoverlay.js' | asset_url | script_tag }}
+
+    <!--[if (gte IE 6)&(lte IE 8)]>
+    {{ 'selectivizr-min.js' | asset_url | script_tag }}
+    <![endif]-->   
+    
+    {{ content_for_header }}
+    
+    
+    {% if template contains 'customers' %}
+    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+    {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+    {% endif %}
+
+    <!-- Favicons
+	================================================== -->
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}">
+  
+  
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+  _fbq.push(['addPixelId', '1441136239487320']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=1441136239487320&amp;ev=NoScript" /></noscript>
+<meta name="msvalidate.01" content="D6E61E714571A65F62E79AEC61969F55" />
+<meta name="p:domain_verify" content="8aeef3d0ec3711d7991a9b49f48288f9"/>
+  
+<!-- Webmaster Tools Verification - Need for Merchant Center -->
+  <meta name="google-site-verification" content="EVobahC99AGzHAS66gp8HVWWon-oa2b_7XMzlF28Y94" />
+  
+<!--- So the right Facebook Image Shows Up --->  
+  
+  {% if template contains 'product' %}
+  <meta property="og:image" content="http:{{ product.featured_image.src | product_img_url: 'grande' }}" />
+  <meta property="og:image:secure_url" content="https:{{ product.featured_image.src | product_img_url: 'grande' }}" />
+{% elsif template contains 'article' %}
+  {% assign img_tag = '<' | append: 'img' %}
+  {% if article.content contains img_tag %}
+    {% assign src = article.content | split: 'src="' %}
+    {% assign src = src[1] | split: '"' | first | remove: 'https:' | remove: 'http:' %}
+    {% if src %}
+      <meta property="og:image" content="http:{{ src }}" />
+      <meta property="og:image:secure_url" content="https:{{ src }}" />
+    {% endif %}
+  {% endif %}
+{% else %}
+  {% if settings.use_logo %}
+    <meta property="og:image" content="http:{{ 'logo.png' | asset_url }}" />
+    <meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_url }}" />
+  {% endif %}
+{% endif %}
+  
+<!--- End the Facebook Image code --->  
+  
+  <!--- Smartlook code --->  
+<script type="text/javascript">
+    window.smartlook||(function(d) {
+    var o=smartlook=function(){ o.api.push(arguments)},s=d.getElementsByTagName('script')[0];
+    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+    c.charset='utf-8';c.src='//rec.getsmartlook.com/bundle.js';s.parentNode.insertBefore(c,s);
+    })(document);
+    smartlook('init', '8ebe29bea2618bf63274c183bfce4733e062317d');
+</script>  
+  <!--- End Smartlook code --->  
+  
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1773752076185181');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1773752076185181&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+  
+  
+<!-- Hits Analytics tracking code -->
+{% if shop.customer_accounts_enabled %}
+  {% if customer %}
+    <script type="text/javascript">
+        function hitsReady() {
+            if (typeof hits != 'undefined')
+                hits('user','identify', {'id' : '{{ customer.id }}'});
+            else
+                setTimeout(hitsReady,500);
+        }
+        window.attachEvent ? window.attachEvent('onload', hitsReady) : window.addEventListener('load', hitsReady, false);
+    </script>
+  {% endif %}
+{% endif %}
+<!-- end of Hits Analytics code -->
+
+ </head>
+
+<body>
+  
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TMTW26"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TMTW26');</script>
+<!-- End Google Tag Manager -->
+  
+  <div id="wrapper" class="container">
+  <div id="header" class="sixteen columns">	
+    
+  
+    <ul id="cart" class="row">
+    {% if shop.customer_accounts_enabled %}
+    <li>
+    
+                {% if customer  %}
+                <a href="/account">My Account</a> {{ "| Logout" | customer_logout_link }} 
+                {% else %}
+      <strong> {{ "Sign in" | customer_login_link }} </strong> or  {{ 'Create an account' | customer_register_link }} 
+                {% endif %}
+
+            {% endif %}
+    </li>
+      <br>
+    {% if cart.item_count != 0 %}
+    <li>
+      <strong> <font color="#F55E0D"> <a href="/cart">View Duffle Bag: ({{ cart.item_count }})</a> </font> </strong>
+    </li>
+    {% endif %}  
+    </ul>
+    
+    <div id="points-balance">
+      {% if customer %}
+      <br>
+      Your Points Balance: <span class="sweettooth-points-balance">(loading)</span>
+      {% endif %}
+    </div>
+    
+    <div id="logo">
+    <h1 style="font-size: 44px">{% if settings.use_logo_image %}
+          <a href="/"><img src="{{ 'orange_150_62915.png' | asset_url }}" alt="{{ shop.name }}" style="border: 0;" class="scale-with-grid"/></a>
+          {% else %}
+          <a href="/">{{ shop.name }}</a>
+          {% endif %}</h1>
+      
+  
+  <!--- <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script> --->
+      
+      <!--- banners below logo ---->
+
+</div>
+      <!--big banner--->
+  
+
+    {% if settings.search-check %}    
+    <div id="search">
+            <form action="/search" method="get">
+                <input type="text" name="q" id="q" class="search-field" placeholder="search..." />
+                <input type="image" src="{{ 'btn-search.png' | asset_url }}" class="search-button" name="search-button" id="seek" />
+            </form>
+    </div>
+    {% endif %}
+        <!-- banner below logo
+
+  ================================================== -->
+      
+
+<div class="clear"></div>
+  </div>
+    <a href="https://inkfidel.com/products/freedom-fleece-dd-form-214-blanket"><img src="{{ 'fleece-sale-banner.jpg' | asset_url }}" alt="{{ shop.name }}" style="border: 0;" class="scale-with-grid"/></a>
+  <div id="navigation" class="sixteen columns">
+          <nav class="primary">
+               <ul id="nav">
+                {% for link in linklists.main-menu.links %}
+                 
+                 <li>
+                {% if link.title == 'Rewards' %}
+                  <a class="rewards-star" href="{{ link.url }}">
+                   {{ link.title }}
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                  </a><br/>
+                {% else %}
+                  <a href="{{ link.url }}">
+                   {{ link.title }}
+                  </a><br/>
+                {% endif %}
+
+                   {% capture child_list_handle %}{{ link.title | handleize }}{% endcapture %}
+            {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+            <div class="arrow-down"></div>
+            <ul>
+            <div class="arrow-up"></div>
+              {% for l in linklists[child_list_handle].links %}
+              <li><a href="{{ l.url }}">{{ l.title }}</a></li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+                   </li>
+            	{% endfor %}
+                </ul>
+            </nav>
+    </div>
+    
+    
+    
+    {% if parent_list_handle == 'reward' %}*{% endif %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    //build dropdown
+    $("<select />").appendTo("#navigation nav");
+    
+    // Create default option "Go to..."
+    $("<option />", {
+       "selected": "selected",
+	   "value"   : "",
+	   "text"    : "Go to..."
+	}).appendTo("nav select");	
+	
+	// Populate dropdowns with the first menu items
+	$("ul#nav li a").each(function() {
+	 	var el = $(this);
+	 	$("<option />", {
+	     	"value"   : el.attr("href"),
+	    	"text"    : el.text()
+	 	}).appendTo("nav select");
+	});
+	
+	//make responsive dropdown menu actually work			
+  	$("nav select").change(function() {
+    	window.location = $(this).find("option:selected").val();
+  	});
+
+});	
+</script> 
+  
+    <div id="content" class="sixteen columns">
+	{% if template != "index" %}
+	
+		<div id="breadcrumb">
+		  <a href="/" class="homepage-link" title="Back to the frontpage">Home</a>
+		  {% if template contains "product" %}
+		    {% if collection %}            
+		      <span class="separator">&raquo;</span> 
+		      {% if collection.handle %}
+		         {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+		         {{ collection.title | link_to: url }}
+		      {% elsif collection.all_products_count > 0 and collection.products.first.type == collection.title %}
+		         {{ collection.title | link_to_type }}
+		      {% elsif collection.all_products_count > 0 and collection.products.first.vendor == collection.title %}
+		         {{ collection.title | link_to_vendor }}
+		      {% endif %}
+		    {% else %}
+		      <span class="separator">&raquo;</span> 
+		      {{ product.type | link_to_type }}
+		    {% endif %}
+		     <span class="separator">&raquo;</span>
+		     <span class="page-title">{{ page_title }}</span>
+		  {% elsif template == "article" %}
+		      <span class="separator">&raquo;</span> 
+		      {{ blog.title | link_to: blog.url }}
+		      <span class="separator">&raquo;</span>
+		      <span class="page-title">{{ page_title }}</span>
+		  {% elsif template contains "collection" %}
+		      {% if current_tags.size > 0 %}
+		      <span class="separator">&raquo;</span>
+		      {{ collection.title | link_to: collection.url }}
+		      <span class="separator">&raquo;</span>
+		      <span class="page-title">{{ current_tags.first }}</span>
+		      {% else %}
+		      <span class="separator">&raquo;</span>
+		      <span class="page-title">{{ page_title }}</span>
+		      {% endif %}
+		  {% else %}
+		      <span class="separator">&raquo;</span>
+		      <span class="page-title">{{ page_title }}</span>
+		  {% endif %}
+          </div>   
+	{% else %}{% endif %}
+    {% if template == 'list-collections' %}
+    {% include 'collection-listing' %}
+    {% else %}
+    {{ content_for_layout }}
+    {% endif %}
+    </div> 
+<!--- Bottom Banner on Page ---->
+ <div class="clear"></div>
+ {% if template != 'index' %}
+ <div class="row"></div>
+ {% endif %}
+</div>
+
+<div id="footer">
+    <div class="container">
+        <ul id="big-footer" class="sixteen columns">
+            <div class="four columns alpha">
+                <h4>About Us</h4>
+                <p>{{ settings.footer_text }}</p>
+            </div>
+
+            <li class="four columns">
+                <h4>Recent News</h4>
+                {% for article in blogs.[settings.homepage-blog].articles limit: 3 %}
+                    <ul>
+                        <li>
+                            <a href="{{article.url}}">{{ article.title }}</a>
+                        </li>
+                    </ul>
+                {% endfor %}                
+            </li>
+            
+            <li class="four columns">
+                <h4>Navigation</h4>
+              {% for link in linklists.footer.links %}
+                <ul>
+                   <li>{{ link.title | link_to: link.url }}</li>
+                </ul>
+                {% endfor %}
+            </li>
+            
+            <li class="four columns omega">
+                <h4>Connect</h4>
+                {% if settings.show_facebook %}<a href="{{ settings.facebook_url }}"><img width="32px" height="32px" src="{{ 'Facebook_logo_100p_icon.png' | asset_url }}" srcset="{{ 'Facebook_logo_100p.png' | asset_url }} 2x"></a>{% endif %}
+                {% if settings.show_twitter %}<a href="http://www.twitter.com/{{ settings.twittername }}"><img width="32px" height="26px" src="{{ 'twitter_logo_100p_icon.png' | asset_url }}" srcset="{{ 'twitter_logo_100p.png' | asset_url }} 2x"></a>{% endif %}
+                {% if settings.show_pinterest %} <a href="{{ settings.pinterest_url }}"><img width="32px" height="32px" src="{{ 'Pinterest.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_tumblr %} <a href="{{ settings.tumblr_url }}"><img src="{{ 'Tumblr.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_flickr %} <a href="{{ settings.flickr_url }}"><img src="{{ 'Flickr.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_youtube %} <a href="{{ settings.youtube_url }}"><img src="{{ 'YouTube.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_googleplus %} <a href="{{ settings.googleplus_url }}"><img width="33px" height="32px" src="{{ 'GooglePlus.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_vimeo %} <a href="{{ settings.vimeo_url }}"><img src="{{ 'Vimeo.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_rss %} <a href="http://rutherford-romaguera2611.myshopify.com/blogs/{{ settings.homepage-blog }}.atom"><img src="{{ 'Feed.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_blogger %} <a href="{{ settings.blogger_url }}"><img src="{{ 'Blogger.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_linkedin %} <a href="{{ settings.linkedin_url }}"><img src="{{ 'LinkedIn.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_lastfm %} <a href="{{ settings.lastfm_url }}"><img src="{{ 'Last.fm.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_instagram %} <a href="{{ settings.instagram_url }}"><img width="33px" height="33px" src="{{ 'instagram.png' | asset_url }}"></a>{% endif %}
+          		{% include 'mailing' %}  
+          </li>  
+        </ul>
+        <div id="close" class="eight columns">
+            {% if settings.american_express %}<img width="50px" height="30px" src="{{ 'amex_thumb.png' | asset_url }}" srcset="{{ 'amex.png' | asset_url }} 2x"/>{% endif %}
+            {% if settings.dankort %}<img width="50px" height="30px" src="{{ 'dankort_thumb.png' | asset_url }}" srcset="{{ 'dankort.png' | asset_url }} 2x"/>{% endif %}
+            {% if settings.diners %}<img width="50px" height="30px" src="{{ 'diners_thumb.png' | asset_url }}" srcset="{{ 'diners.png' | asset_url }} 2x"/>{% endif %}
+            {% if settings.discover %}<img width="50px" height="30px" src="{{ 'discover_thumb.png' | asset_url }}" srcset="{{ 'discover.png' | asset_url }} 2x"/>{% endif %}
+            {% if settings.forbru %}<img width="50px" height="30px" src="{{ 'forbru_thumb.png' | asset_url }}" srcset="{{ 'forbru.png' | asset_url }} 2x"/>{% endif %}
+            {% if settings.jcb %}<img width="50px" height="30px" src="{{ 'jcb_thumb.png' | asset_url }}" srcset="{{ 'jcb.png' | asset_url }} 2x"/>{% endif %}
+            {% if settings.maestro %}<img width="50px" height="30px" src="{{ 'maestro_thumb.png' | asset_url }}" srcset="{{ 'maestro.png' | asset_url }} 2x"/>{% endif %}
+            {% if settings.mastercard %}<img width="50px" height="30px" src="{{ 'mastercard_thumb.png' | asset_url }}" srcset="{{ 'mastercard.png' | asset_url }} 2x"/>{% endif %}
+            {% if settings.paypal %}<img width="50px" height="30px" src="{{ 'paypa_thumb.png' | asset_url }}" srcset="{{ 'paypa.png' | asset_url }} 2x"/>{% endif %}  
+            {% if settings.solo %}<img width="50px" height="30px" src="{{ 'solo_thumb.png' | asset_url }}" srcset="{{ 'solo.png' | asset_url }} 2x"/>{% endif %}  
+            {% if settings.visa %}<img width="50px" height="30px" src="{{ 'visa_thumb.png' | asset_url }}" srcset="{{ 'visa.png' | asset_url }} 2x"/>{% endif %}
+        </div>
+        
+        <div id="close-right" class="eight columns">
+        &copy; Copyright {{ year }}{{ shop.name }}
+        </div>
+    </div>   
+</div>
+
+<script>
+// (c) Copyright 2011 Caroline Schnapp. All Rights Reserved. Contact: mllegeorgesand@gmail.com
+// See http://wiki.shopify.com/Linked_Options
+
+var Shopify = Shopify || {};
+
+Shopify.optionsMap = {};
+
+Shopify.updateOptionsInSelector = function(selectorIndex) {
+    
+  switch (selectorIndex) {
+    case 0:
+      var key = 'root';
+      var selector = jQuery('.single-option-selector:eq(0)');
+      break;
+    case 1:
+      var key = jQuery('.single-option-selector:eq(0)').val();
+      var selector = jQuery('.single-option-selector:eq(1)');
+      break;
+    case 2:
+      var key = jQuery('.single-option-selector:eq(0)').val();  
+      key += ' / ' + jQuery('.single-option-selector:eq(1)').val();
+      var selector = jQuery('.single-option-selector:eq(2)');
+  }
+  
+  var initialValue = selector.val();
+  selector.empty();    
+  var availableOptions = Shopify.optionsMap[key];
+  for (var i=0; i<availableOptions.length; i++) {
+    var option = availableOptions[i];
+    var newOption = jQuery('<option></option>').val(option).html(option);
+    selector.append(newOption);
+  }
+  if (jQuery.inArray(initialValue, availableOptions) !== -1) {
+    selector.val(initialValue);
+  }
+  selector.trigger('change');  
+  
+};
+
+Shopify.linkOptionSelectors = function(product) {
+  // Building our mapping object.
+  for (var i=0; i<product.variants.length; i++) {
+    var variant = product.variants[i];
+    if (variant.available) {
+      // Gathering values for the 1st drop-down.
+      Shopify.optionsMap['root'] = Shopify.optionsMap['root'] || [];
+      Shopify.optionsMap['root'].push(variant.option1);
+      Shopify.optionsMap['root'] = Shopify.uniq(Shopify.optionsMap['root']);
+      // Gathering values for the 2nd drop-down.
+      if (product.options.length > 1) {
+        var key = variant.option1;
+        Shopify.optionsMap[key] = Shopify.optionsMap[key] || [];
+        Shopify.optionsMap[key].push(variant.option2);
+        Shopify.optionsMap[key] = Shopify.uniq(Shopify.optionsMap[key]);
+      }
+      // Gathering values for the 3rd drop-down.
+      if (product.options.length === 3) {
+        var key = variant.option1 + ' / ' + variant.option2;
+        Shopify.optionsMap[key] = Shopify.optionsMap[key] || [];
+        Shopify.optionsMap[key].push(variant.option3);
+        Shopify.optionsMap[key] = Shopify.uniq(Shopify.optionsMap[key]);
+      }
+    }
+  }
+  // Update options right away.
+  Shopify.updateOptionsInSelector(0);
+  if (product.options.length > 1) Shopify.updateOptionsInSelector(1);
+  if (product.options.length === 3) Shopify.updateOptionsInSelector(2);
+  // When there is an update in the first dropdown.
+  jQuery(".single-option-selector:eq(0)").change(function() {
+    Shopify.updateOptionsInSelector(1);
+    if (product.options.length === 3) Shopify.updateOptionsInSelector(2);
+    return true;
+  });
+  // When there is an update in the second dropdown.
+  jQuery(".single-option-selector:eq(1)").change(function() {
+    if (product.options.length === 3) Shopify.updateOptionsInSelector(2);
+    return true;
+  });
+  
+};
+
+</script>
+  
+  <script>
+  $(function() { 
+    if($("ul.color.options .selected").length > 0){
+  		$("ul.color.options .selected").trigger("click");
+    }
+   });
+  </script>
+<input type="hidden" name="_pc_params" value="{{ shop.permanent_domain }}:{{ customer.id }}" />
+  
+  <!-- Facebook Conversion Code for shirt purchases -->
+<script>(function() {
+  var _fbq = window._fbq || (window._fbq = []);
+  if (!_fbq.loaded) {
+    var fbds = document.createElement('script');
+    fbds.async = true;
+    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fbds, s);
+    _fbq.loaded = true;
+  }
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', '6014834095823', {'value':'0.00','currency':'USD'}]);
+</script>
+
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6014834095823&amp;cd[value]=0.00&amp;cd[currency]=USD&amp;noscript=1" /></noscript>
+
+<!-- Google Code for Remarketing Tag -->
+<!--------------------------------------------------
+Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+{% if template == 'product' %}
+<script type="text/javascript">
+var google_tag_params = { 
+ecomm_prodid: 'shopify_CA_{{ product.id }}_{{ product.variants.first.id }}', 
+ecomm_pagetype: '{{ template }}', 
+ecomm_totalvalue: '{{ product.price_min | money_without_currency }}',
+};
+</script>
+{% endif %}
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 956104739;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/956104739/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+  <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+  
+<!--- AdRoll --->
+  
+  <script type="text/javascript">
+    adroll_adv_id = "CEWWUDPI5VHK7K36JYG3NN";
+    adroll_pix_id = "CQVBXSVGFRB37DFWR4IFTO";
+    adroll_email =  "tristan@inkfidel.com";
+    (function () {
+        var _onload = function(){
+            if (document.readyState && !/loaded|complete/.test(document.readyState)){setTimeout(_onload, 10);return}
+            if (!window.__adroll_loaded){__adroll_loaded=true;setTimeout(_onload, 50);return}
+            var scr = document.createElement("script");
+            var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+            scr.setAttribute('async', 'true');
+            scr.type = "text/javascript";
+            scr.src = host + "/j/roundtrip.js";
+            ((document.getElementsByTagName('head') || [null])[0] ||
+                document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+        };
+        if (window.addEventListener) {window.addEventListener('load', _onload, false);}
+        else {window.attachEvent('onload', _onload)}
+    }());
+</script>
+  
+
+{% include 'gts' %}
+    
+              {{ 'option_selection.js' | asset_url | script_tag }}
+    {{ 'jquery.flexslider.js' | asset_url | script_tag }}
+    {{ 'jquery.lazyload.min.js' | asset_url | script_tag }}
+
+
+          {{ 'jquery.tweet.js' | asset_url | script_tag }}
+
+    {{ 'jquery.easing.1.3.js' | asset_url | script_tag }}
+  
+  <!-- Twitter universal website tag code -->
+<script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+<script type="text/javascript">twttr.conversion.trackPid('nursm', { tw_sale_amount: 0, tw_order_quantity: 0 });</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://analytics.twitter.com/i/adsct?txn_id=nursm&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+<img height="1" width="1" style="display:none;" alt="" src="//t.co/i/adsct?txn_id=nursm&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+</noscript>
+<!-- End Twitter universal website tag code -->
+
+      
+
+<!-- BEEKETINGSCRIPT CODE START -->{% include 'bk-tracking' %}<!-- BEEKETINGSCRIPT CODE END -->  
+
+  
+
+  
+
+  
+  
+  
+  <script>
+    console.log('all products count = {{ collections.all-products.products_count }}');
+  </script>
+
+<script type="text/javascript" id="product-filter-scriptblock">
+    var mO = function (oO, oA) {for (var i in oA) {if (oA.hasOwnProperty(i)) {oO[i] = oA[i];}}}, fGroups = {}, filters = {}, fSettings = {};
+    {% for fGroup in shop.metafields.zproductfilter-g %}mO(fGroups, {{fGroup | last}});{% endfor %}
+    {% for filter in shop.metafields.zproductfilter-f %}mO(filters, {{filter | last}});{% endfor %}
+    {% for setting in shop.metafields.zproductfilter %}mO(fSettings, {{setting | last}});{% endfor %}
+</script>
+{{ 'zproducts.js' | asset_url | script_tag}}
+
+  
+<!-- Power Tools view count code -->
+{% if template == 'product' %}
+<script type="text/javascript">
+    (function () {
+        var oldonload = window.onload;
+        window.onload = function(){
+            var scr = document.createElement("script");
+            scr.setAttribute('async', 'true');
+            scr.type = "text/javascript";
+            scr.src = "http://ping.shopifypowertools.com/ping/{{ shop.permanent_domain }}/{{ product.id }}?weight=1{% if collection %}&collection_id={{ collection.handle }}{% endif %}";
+            ((document.getElementsByTagName('head') || [null])[0] ||
+                    document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+            if(oldonload){oldonload()}};
+    }());
+</script>
+{% endif %}
+<!-- Power Tools view count code -->
+  
+  {% include 'sweettooth-initializer' %}
+
+  {% include 'sweettooth-tab-widget' %}
+
+</body>
+</html>

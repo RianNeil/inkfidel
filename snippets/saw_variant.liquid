@@ -1,0 +1,9 @@
+
+        {% assign saw_variant_compare_at_price = saw_variant.compare_at_price %}
+        {% if saw_variant_compare_at_price == blank %}
+        	{% assign saw_variant_compare_at_price = saw_variant.price %}
+        {% endif %}
+        {% assign saw_variant_price = saw_variant_compare_at_price | times: saw_discount %}
+        {% if saw_variant_price > saw_variant.price  %}
+            {% assign saw_variant_price = saw_variant.price %}
+        {% endif %}

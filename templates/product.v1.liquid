@@ -1,0 +1,543 @@
+
+<!-- spurit_po-added -->
+{% include 'spurit_po-product-snippet' %}
+<!-- /spurit_po-added -->
+
+<!-- Bold Duplicate And Hide{% if product.metafields.inventory.ShappifyHidden == "true" %}
+Whoops! Doesn't look like the product is available. Let us know and we'll help you out.
+{% break %}{% endif %}
+
+{% include 'buyx-product' with product %}
+{% include 'buyx-price-min' with product %} 
+
+
+{% include 'saw_compute_discount' with product %}
+
+<div id="richsnippet" style="display:none;visibility:hidden;">
+<div itemscope itemtype="http://data-vocabulary.org/Product">
+<span itemprop="brand">{{ product.vendor }}</span>
+  <span itemprop="name"><h1>{{ product.title | escape }}</h1></span>
+<img itemprop="image" src="{{ product.images[0] | product_img_url: "large" }}" />
+<span itemprop="description">{{ product.description }}</span>
+Category: <span itemprop="category" content="{{ product.type }}">{{ product.type }}</span>
+Product #: <span itemprop="identifier" content="sku:{{ product.variants[0].sku }}">{{ product.variants[0].sku }}</span>
+<span itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
+Regular price: {{ product.price | money }}
+<meta itemprop="currency" content="{{ shop.currency }}" />
+$<span itemprop="price">{{ product.price | money }}</span>
+Available from: <span itemprop="seller">{{ shop.url }}</span>
+{% if product.available == 'true' %}
+<span itemprop="availability" content="in_stock">In stock</span>
+{% endif %}
+</span>
+</div>
+</div> <!--end-->
+
+<script type="text/javascript">
+var google_tag_params = {
+ecomm_prodid: 'shopify_US_{{ product.id }}_{{ product.variants.first.id }}'
+ecomm_pagetype: 'shopify_US_{{ productpage }}'
+ecomm_totalvalue: 'shopify_US_{{ product.price_min | money_without_currency }}'
+};
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 956104739;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/956104739/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<!--- For Mobile --->
+    <div id="mobile-product" class="eight columns alpha">
+        <div class="flexslider">
+          <ul class="slides">    
+            {% for image in product.images %}
+            <li><img data-image-id="{{ image.id }}" src="{{ image.src | product_img_url: 'grande' }}" alt="{{ image.variants | escape }}" class="scale-with-grid"></a></li>
+            {% endfor %}      
+          </ul>
+        </div>  
+    <script type="text/javascript">
+    $(window).load(function() {
+      $('.flexslider').flexslider({
+        animation: "slide",
+        directionNav: false
+      });
+    });
+    </script>
+    </div>   
+
+<!--- For Desktop --->
+
+
+
+
+<div id="product-images" class="eight columns alpha">
+
+  <div id="product-photos">
+    
+    <div id="product-photo-container">
+          {% for image in product.images %}{% if forloop.first %}
+          <a class="gallery" href="{{ image.src | product_img_url: 'original' }}" rel="gallery">
+            <img data-image-id="{{ image.id }}" src="{{ image.src | product_img_url: 'large' }}" alt="{{ image.alt | escape }}" class="scale-with-grid"/>
+          </a>
+          {% endif %}{% endfor %}
+    </div>
+    
+    {% if product.images.size > 1 %}
+    <ul id="product-photo-thumbs">
+      {% for image in product.images %}
+        <li class="product-photo-thumb">
+            <img data-image-id="{{ image.id }}" src="{{ image.src | product_img_url: 'large' }}" alt="{{ image.alt | escape }}" class="scale-with-grid" />
+        </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    
+  </div>
+        <script>
+            jQuery('#product-photo-container a').colorbox();
+        //when thumb is clicked, set main image to it
+        $('ul#product-photo-thumbs img').click( function() {
+            $('#product-photo-container a').prop('href', $(this).prop('src').replace(/(_small)|(_compact)|(_medium)|(_large)|(_grande)/, ''));
+            $('#product-photo-container img').prop('src', $(this).prop('src'));
+            return true;  //stop link from navigating
+        })                   
+        </script>
+</div>
+
+<div id="product-description" class="eight columns omega" itemprop="http://schema.org/Product">
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  
+  <h1 itemprop="name">{{ product.title | escape }}</h1>
+   <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+     <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+   <!--  <meta itemprop="priceCurrency" content="[[ shop.currency ]]">-->
+    <h2>
+        <p id="product-price" itemprop="price">
+
+
+  {% if saw_discount == 1 %}
+          <!-- original prices here -->
+              {% if product.compare_at_price > buyx_price_min %}
+              <span class="product-price" itemprop="price">{{ buyx_price_min | money }}</span>&nbsp;
+              <span class="was">{{ product.compare_at_price_max | money  }}</span>
+              {% else %}
+              <span class="product-price" itemprop="price">{{ buyx_price_min | money }}</span>
+              {% endif %}
+  {% else %}
+              <span class="product-price" itemprop="price">{{ saw_product_price | money }}</span>&nbsp;
+              <span class="was">{{ saw_product_compare_at_price | money  }}</span>
+  {% endif %}          
+        </p>  
+    </h2>
+     
+     {% if product.metafields.yotpo.reviews_count and product.metafields.yotpo.reviews_count != "0" %}
+ <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+ <span itemprop="itemReviewed">{{ product.title }}</span>
+ has a rating of <span itemprop="ratingValue">{{ product.metafields.yotpo.reviews_average }}</span> stars
+ based on <span itemprop="ratingCount">{{ product.metafields.yotpo.reviews_count }}</span> reviews.
+ </div>
+ {% endif %}
+     
+     <!--- Yotpo --->
+<div class="yotpo bottomLine"
+    data-appkey="hWGkt6tPjuxBYGgeVqe3YUpfvlJteWKbRtDICMjL"
+    data-domain="{{ shop.permanent_domain | escape }}"
+    data-product-id="{{ product.id }}"
+    data-product-models="{{ product.id }}"
+    data-name="{{ product.title | escape }}"
+    data-url="{{ shop.url }}{{ product.url }}"
+    data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+    data-description="{{ product.description | escape }}"
+    data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+    </div>   
+     
+ <p> 
+   
+   <!--- Shopify Reviews 
+<div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div> --->
+     
+  <p>
+    <strong>Shipping Info:</strong>
+    </p>
+  <p>
+    <strong>Shirts/Blankets/Hoodies</strong>: Flat-rate shipping via <strong>$5.95 USPS Priority Mail (2-3 Days)</strong>
+  </p>
+  <p>
+    <strong>Decals</strong>: Shipped via <strong> $2 USPS Standard Mail (3-6 days)</strong>
+  </p>
+    
+   
+
+		
+ 
+  {% include 'WANT' %}
+  
+  <div class="desc">
+     <div id="soc">
+        {% include 'social' with product %}
+        </div>
+	
+    <form action="/cart/add" method="post" data-product-id="{{ product.id }}" enctype="multipart/form-data" >
+        {% if buyx_product_variants_size > 1 %}      
+            {% if buyx_product_available and buyx_product_variants_size > 1 %}
+            <div id="swatches">{% include 'swatches' %}</div>
+            {% endif %}       
+        <div id="product-variants">        
+              <select id="product-select" name='id'>
+                {% for variant in product.variants %}
+                  {% unless variant.title contains '% Off' %}
+                  <option value="{{ variant.id }}">{{ variant.title }}></option>
+  {% endunless %}
+                {% endfor %}
+              </select>
+        </div>   
+            {% else %}  
+      <!--this may be the problem with product decal code-->
+        <div class= shappify_add_to_cart_form "what-is-it">
+            {% if product.options.first != 'Title'  and product.options.first != 'BuyXDiscount' %}
+            <label>{{ product.options.first }}:</label>
+          {% for variant in product.variants %}
+          {% unless variant.title contains '% Off' %}
+          <span class="it-is">{{ variant.option1 | escape }}</span>
+          {% endunless %}
+          {% endfor %}
+            {% endif %}
+        </div>
+        
+        <div id="product-variants"></div><!-- product variants -->  
+            <input  type="hidden" id="{{ variant.id }}" name="id" value="{{ product.variants[0].id }}" />
+
+        {% endif %}
+       {% if buyx_product_available %}  
+        <p> 
+        <span class="in-stock"><span id="in_stock">{% if nts[0].inventory_quantity <= 5 %}Only {{product.variants[0].inventory_quantity}} left!{%endif%}</span></span>
+          <input type="submit" name="button" id="add" value="Add to My Duffle Bag" />
+        <script data-product="{{ product | json | escape }}" id="out-of-stock" src="//setup.shopapps.io/out-of-stock/script/inkfidel.js"></script>
+		<span id="in-preorder-date"></span>
+        </p>
+<!-- Bold: Options -->{% include 'shappify-options' %} 
+       {% endif %}
+        {% unless buyx_product_available%}
+  
+          <div class="sorry">
+                <img src="{{ 'allgone.png' | asset_url }}">
+          </div>
+    {% endunless %}
+    
+    </form>
+    {% include 'iStock-notify-me' %}
+
+ 
+
+        <h4>The Story</h4>
+        <p>{{ product.description }}</p>
+                <ul class="accordion">
+        			{% unless settings.tab1 == blank %}
+        			<li id="two" class="size">
+        				<a href="#two"><h4>{{ settings.tab1_title }}</h4></a>
+        				<ul class="sub-menu">					
+        					<li><p>{{ settings.tab1 }}</p></li>
+        				</ul>
+        			</li>
+                    {% endunless %}
+        			{% unless settings.tab2 == blank %}
+        			<li id="three" class="delivery">
+        				<a href="#three"><h4>{{ settings.tab2_title }}</h4></a>
+        				<ul class="sub-menu">
+        					<li><p>{{ settings.tab2 }}</p></li>
+        				</ul>
+        			</li>
+                    {% endunless %}
+        			{% unless settings.tab3 == blank %}
+        			<li id="four" class="returns">
+        				<a href="#four"><h4>{{ settings.tab3_title }}</h4></a>
+        				<ul class="sub-menu">					
+        					<li><p>{{ settings.tab3 }}</p></li>
+        				</ul>
+        			</li>
+                    {% endunless %}	
+        		</ul>
+        
+        
+        <script type="text/javascript">
+        $(document).ready(function() {
+        // Store variables			
+        var accordion_head = $('.accordion > li > a'),
+        	accordion_body = $('.accordion li > .sub-menu');
+        // Click function
+        accordion_head.on('click', function(event) {
+        	// Disable header links				
+        	event.preventDefault();
+        	// Show and hide the tabs on click
+        	if ($(this).attr('class') != 'active'){
+        		accordion_body.slideUp('normal');
+        		$(this).next().stop(true,true).slideToggle('normal');
+        		accordion_head.removeClass('active');
+        		$(this).addClass('active');
+            } else {
+                accordion_body.slideUp('normal');
+                accordion_head.removeClass('active');
+        	}
+        });
+        });
+        </script>
+             
+        </div>
+
+        <div id="productnav" class="eight columns omega">
+        <h4>View More:</h4>
+            <ul class="view-more">
+                <li>Product Type: {{ product.type | link_to_type }}</li>
+                <li>Brand: {{ product.vendor | link_to_vendor }}</li>
+                {% if collection %}
+                <li>Collection: {% capture url %}/collections/{{ collection.handle }}{% endcapture %}{{ collection.title | link_to: url }}</li>
+                {% endif %}
+            </ul>
+        </div>
+</div>
+
+<div class="clear"></div>
+  
+  
+  <div class="yotpo yotpo-main-widget"
+              data-product-id="{{ product.id }}"
+              data-name="{{ product.title | escape }}"
+              data-url="{{ shop.url }}{{ product.url }}"
+              data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}"
+              data-description="{{ product.description | escape }}">
+              </div>
+  
+  
+  
+
+{% if settings.show_related_products %}
+<div id="recent">
+{% include 'related-products' %}
+</div>
+{% endif %}
+
+        {% include 'saw_compute_discount' with product %}
+
+{% include 'buyx-price-min' with product %} 
+
+<script>
+jQuery(function() {
+
+  // OPTION SELECT
+  {% if buyx_product_available and buyx_product_variants_size > 1 %}
+  
+  {% assign look_for_image_match = false %}
+  {% assign option_index = 0 %}
+  {% for option in product.options %}
+    {% assign downcased_option = option | downcase %}
+    {% if downcased_option contains 'color' or downcased_option contains 'colour' or downcased_option contains 'style' %}
+      {% assign look_for_image_match = true %}
+      {% assign option_index = forloop.index0 %}
+    {% endif %}
+  {% endfor %} 
+  Shopify.doNotTriggerClickOnThumb = false;
+
+   var allProducts = {{ product | json }};
+   var selectCallback = function(variant, selector) {
+   var tags = allProducts.tags;
+   if(variant.inventory_quantity <= 0){ 
+   for (i = 0; i < tags.length; i++) {
+     if(tags[i].split('-')[0] == variant.id){
+       $("#in-preorder-date").html(tags[i].split('-')[1]);
+     }
+   }
+   }
+    
+    if(variant.inventory_quantity <= 5){
+		$("#in_stock").html("Only "+variant.inventory_quantity+" left!");
+    }else{
+        $("#in_stock").html("");
+    }
+    
+   jQuery.each( allProducts.variants, function( i, val ) {
+     if(val.inventory_quantity == 0){
+       $(".variant-"+val.id).find("span").html(val.option1);
+     }else{
+       $(".variant-"+val.id).find("span").html(val.option1);
+     }
+	});
+    
+    if(variant.inventory_quantity == 0){
+      $(".size.options li.selected span").html(variant.option1);
+    }
+    if (variant && variant.available) {
+      // selected a valid variant that is available.
+      jQuery('#add').removeClass('disabled').removeAttr('disabled').val('Add to Cart').fadeTo(200,1); // remove unavailable class from add-to-cart button, and re-enable button
+      
+      if ( variant.compare_at_price > variant.price ) {
+        jQuery('#product-price').html('<span class="money">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>'+'&nbsp;<span class="was">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</span>');  // update price field
+      } else {
+        jQuery('#product-price').html('<span class="money">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );  // update price field
+      }
+      
+
+    } else {
+      // variant doesn't exist or is sold out
+      var message = variant ? "Sold Out" : "Unavailable";  
+      jQuery('#add').val(message).addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);      // set add-to-cart button to unavailable class and disable button 
+    }
+
+  };
+
+function buyx_product_json(product) {
+     if (product == null) {
+          return null
+     }
+     var variants = []
+     //does it have BuyXDiscount option?
+     var option_position = -1
+     for (var oi = 0, olen = product.options.length; oi < olen; oi++) {
+         if (product.options[oi] == "BuyXDiscount") {
+             option_position = oi+1
+             break
+         }
+     }
+     if (option_position == -1) {
+         return product
+     }
+     if (product.options.length > 1) {
+          product.options.splice(option_position-1, 1)
+     } else {
+          product.options[0] = "Title"
+     }
+     option_position = "option" + option_position
+     product.available = false
+     for (var vi = 0, vlen = product.variants.length; vi < vlen; vi++) {
+         if (product.variants[vi][option_position] == "Default") {
+             //product.variants[vi][option_position] = ""
+             variants.push(product.variants[vi])
+             product.available = product.available || product.variants[vi].available
+         }
+     }
+     product.variants = variants
+     return product
+  }
+
+    
+                                      
+           function sawholesale_product_json(product) {
+             var saw_discount_js = {{saw_discount}}
+                 if (saw_discount_js == 1) {
+                 return product 
+                 }
+             var saw_product_compare_at_price_js, variant_price
+             for (var vi = 0, vlen = product.variants.length; vi < vlen; vi++) {
+                 saw_product_compare_at_price_js = product.variants[vi].compare_at_price
+                 if (saw_product_compare_at_price_js == null) {
+                   saw_product_compare_at_price_js = product.variants[vi].price 
+                 }
+                 variant_price = saw_product_compare_at_price_js * saw_discount_js
+                 if (variant_price > product.variants[vi].price) {
+                   variant_price = product.variants[vi].price
+                 }
+               
+                 product.variants[vi].price = variant_price
+                 if (saw_product_compare_at_price_js > variant_price) {                   
+                 	product.variants[vi].compare_at_price = saw_product_compare_at_price_js
+                 }
+             }
+             product.price = product.variants[0].price
+             product.compare_at_price = product.variants[0].compare_at_price
+             product.compare_at_price_min = product.variants[0].compare_at_price_min
+             product.compare_at_price_max = product.variants[0].compare_at_price_max
+
+          	//console.log(product)
+             return product
+          }
+
+
+    
+  new Shopify.OptionSelectors("product-select", { product: sawholesale_product_json(buyx_product_json({{ product | json }})), onVariantSelected: selectCallback });
+ 
+  // Auto-select first available variant on page load.
+  {% assign found_one_in_stock = false %}
+  {% for variant in product.variants %}
+    {% if variant.available and found_one_in_stock == false %}
+      {% assign found_one_in_stock = true %}
+      {% for option in product.options %}
+      jQuery('.single-option-selector:eq({{ forloop.index0 }})').val({{ variant.options[forloop.index0] | json }}).trigger('change');
+
+    // BEGIN SWATCHES
+    jQuery('.swatch li').filter(function() { return jQuery(this).attr('data-option-title') === {{ variant.options[forloop.index0] | json }} }).addClass('selected');
+    // END SWATCHES
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  
+    // BEGIN SWATCHES
+    jQuery('.swatch li').click(function() {
+      var optionValue = jQuery(this).attr('data-option-title'); // what have I just clicked on?
+      jQuery(this).parents('.swatch').find('li').removeClass('selected'); // un-select all the buttons
+      jQuery(this).addClass('selected'); // select the current one
+      jQuery('.single-option-selector:contains(' + optionValue + ')').val(optionValue).trigger('change');
+      return false;
+    });
+    // END SWATCHES
+  
+  {% if look_for_image_match %}
+  // If a Color is selected, show the matching product image.
+  jQuery('.single-option-selector:eq({{ option_index }})').bind('change', function() {
+    if (!Shopify.doNotTriggerClickOnThumb) {
+      jQuery('#product-photo-thumbs img[alt="' + jQuery(this).val() + '"]:eq(0)').trigger('click');      
+    }
+    Shopify.doNotTriggerClickOnThumb = false;
+    return true;
+  });  
+  // If an image is shown in Main View, auto-select the corresponding Color option.
+  jQuery('#product-photo-thumbs img').bind('click', function() {
+   var color = jQuery(this).attr('alt');
+   if (color && color !== '') {
+     var options = jQuery('.single-option-selector:eq({{ option_index }}) option[value="' + color + '"]');
+     if (options.size() !== 0) {
+       Shopify.doNotTriggerClickOnThumb = true;
+       jQuery('.single-option-selector:eq({{ option_index }})').val(color).trigger('change');
+     }
+   }
+   return true;
+  });
+  {% endif %}
+  
+  {% endif %}
+
+});
+
+</script>
+              
+            
+
+
+
+
+
+<!-- AddShoppers Product Schema Start 
+<div itemscope itemtype="http://schema.org/Product" style="display: none">
+<span itemprop="name">{{ product.title }}</span>
+<span itemprop="description">{{ product.content }}</span>
+<img itemprop="image" src="{{ product.featured_image | product_img_url: 'compact' }}"/>
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+<span itemprop="price">{{ product.price | money }}</span>
+{% if product.available %}
+<link itemprop="availability" href="http://schema.org/InStock">In Stock</link>
+{% else %}
+<link itemprop="availability" href="http://schema.org/OutOfStock">Out of Stock</link>
+{% endif %}
+</div>
+</div>
+<!-- AddShoppers Product Schema End -->
+
+ 

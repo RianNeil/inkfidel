@@ -1,0 +1,64 @@
+{% assign saw_discount = 0 %}
+
+{% if customer != blank %}
+  {% for mf in saw_compute_discount.metafields.sawholesale %}
+      {% capture product_customer_tag %}{{ mf | first | replace: 'discount_', '' }}{% endcapture %}
+      {% if customer.tags contains product_customer_tag %}
+           	{% assign discount_key = product_customer_tag | prepend: 'discount_' %}
+            {% assign saw_discount = saw_compute_discount.metafields.sawholesale[discount_key] | divided_by: 100.0 %}
+            <!-- product_customer_tag: {{ product_customer_tag }} customer_tag: {{ customer_tag }} DISCOUNT {{ saw_compute_discount.metafields.sawholesale[discount_key] }} -->
+      {% endif %}
+  {% endfor %}
+{% endif %}
+{% assign saw_discount = 1 | minus: saw_discount %}
+
+
+{% assign wbuyx_price_min = saw_compute_discount.price_max %}
+{% for variant in saw_compute_discount.variants %}
+	{% unless variant.title contains '% Off' %}
+  {% unless variant.metafields.shappify_qb.qb_hide == "1" %}
+  {% unless variant.metafields.shappify_bundle.is_bundle == "true" %}
+  {% unless variant.metafields.brodev_scn.hide == "true" %}
+  {% unless variant.metafields.secomapp.freegifts %}
+
+      {% if variant.price < wbuyx_price_min %}
+        {% assign wbuyx_price_min = variant.price %}
+      {% endif %}
+	{% endunless %}
+	{% endunless %}
+	{% endunless %}
+	{% endunless %}
+	{% endunless %}
+{% endfor %}
+
+
+{% assign saw_product_compare_at_price = saw_compute_discount.compare_at_price %}
+
+{% if saw_product_compare_at_price == blank  or saw_product_compare_at_price == 0 or saw_product_compare_at_price < wbuyx_price_min %}
+	{% assign saw_product_compare_at_price = wbuyx_price_min %}
+{% endif %}
+
+{% assign saw_product_price = saw_product_compare_at_price | times: saw_discount %}
+{% if saw_product_price > wbuyx_price_min %}
+	{% assign saw_product_price = wbuyx_price_min %}
+{% endif %}
+<!-- wbuyx_price_min {{wbuyx_price_min}}
+saw_product_price {{saw_product_price}}
+-->
+
+
+
+{% comment %}
+{% assign saw_product_compare_at_price_min = saw_compute_discount.compare_at_price_min %}
+{% if saw_product_compare_at_price_min == blank or saw_product_compare_at_price_min == 0 %}
+	{% assign saw_product_compare_at_price_min = saw_compute_discount.price_min %}
+{% endif %}
+{% assign saw_product_price_min = saw_product_compare_at_price_min | times: saw_discount %}
+
+{% assign saw_product_compare_at_price_max = saw_compute_discount.compare_at_price_max %}
+{% if saw_product_compare_at_price_max == blank or saw_product_compare_at_price_max == 0 %}
+	{% assign saw_product_compare_at_price_max = saw_compute_discount.price_max %}
+{% endif %}
+{% assign saw_product_price_max = saw_product_compare_at_price_max | times: saw_discount %}
+
+{% endcomment %}

@@ -1,0 +1,71 @@
+<div id="search-page">
+{% if search.performed %}     
+    {% paginate search.results by 30 %}  
+
+<div id="paginate-bar" class="row">
+    <span class="left">
+    </span>
+    <span class="right">
+        {% if paginate.pages > 1 %}
+        {% if paginate.previous %}  {{ 'prev' | link_to: paginate.previous.url }} | {% endif %} Page {{ paginate.current_page }} of {{ paginate.pages }} {% if paginate.next %} | {{ 'Next' | link_to: paginate.next.url }}{% endif %}
+        {% endif %}
+    </span>
+</div>
+
+<div id="search-results">  
+    
+      {% if search.performed %}
+	
+		{% if search.results == empty %}  
+		  <p>Your search for "{{search.terms | escape}}" did not yield any results</p>              
+		{% else %}     
+
+            <ul id="four-column-collectionlist">
+                {% for item in search.results %} 
+              <!-- Bold Duplicate And Hide -->{% if item.metafields.inventory.ShappifyHidden == "true" %}{% continue %}{% endif %}
+                <li class="four columns{% cycle ' alpha', '', '', ' omega' %}"> 
+                    <div class="four-column-collection-image">              
+                      <a href="{{item.url}}" title="">
+                      <img src="{{ item.featured_image | product_img_url: 'large' }}" class="scale-with-grid">
+                      </a>
+                    </div>
+                    
+                    <div class="collection-products">
+                      {{ item.title | link_to: item.url }}
+                    </div>
+            
+                </li>
+              {% endfor %}
+              </ul>           
+		{% endif %}
+
+	  {% endif %}
+
+	  <div id="pagination" class="sixteen columns">
+
+	    <span class="count">Showing items {{ paginate.current_offset | plus: 1 }}-{% if paginate.next %}{{ paginate.current_offset | plus: paginate.page_size }}{% else %}{{ paginate.items }}{% endif %} of {{ paginate.items }}.</span>
+
+	    {% if paginate.previous %}
+	    {{ '<' | link_to: paginate.previous.url }}
+	    {% endif %}
+	    {% for part in paginate.parts %}
+	    {% if part.is_link %}
+	    {{ part.title | link_to: part.url }}
+	    {% else %}
+	    {% if part.title == '&hellip;' %}
+	    {{ part.title }}
+	    {% else %}
+	    <span class="current">{{ part.title }}</span>
+	    {% endif %}
+	    {% endif %}
+	    {% endfor %}
+	    {% if paginate.next %}
+	    {{ '>' | link_to: paginate.next.url }}
+	    {% endif %}
+	  </div>
+	  {% endpaginate %}
+
+
+        {% endif %}
+</div>
+</div>

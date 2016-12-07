@@ -1,0 +1,22 @@
+{% comment %}
+PRODUCT SORT 
+Includes: arboreal.js, product-sort.js
+Creates options tree from product variants.
+{% endcomment %}
+
+<div id="variants">
+  {% for variant in product.variants %}
+  <div class="variant" variantid = "{{variant.id}}" option1 = "{{variant.option1}}" option2 =  "{{variant.option2}}" option3 = "{{variant.option3}}"></div>
+  {% endfor %}
+</div>
+
+<div id="options">  
+  {% for option in product.options %}
+  <div class="option" id="{{ forloop.index }}" value="{{option}}"></div>
+  {% endfor %}  
+</div>
+
+
+{{ 'arboreal.js' | asset_url | script_tag }}
+{{ 'product-sort.js' | asset_url | script_tag }}
+{{ 'swatch-button-fix.js' | asset_url | script_tag }}

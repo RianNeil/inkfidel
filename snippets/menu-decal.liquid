@@ -1,0 +1,7 @@
+<h1>Shop Decals</h1>
+{% for link in linklists.decal-collections.links %}
+  <div class="decal-menu-option">
+    <a href="{{ link.url }}">{{ link.title }}</a>
+  </div>
+{% endfor %}
+ 

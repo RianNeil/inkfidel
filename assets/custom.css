@@ -1,0 +1,368 @@
+ul.size, ul.material {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+
+form .search-button{
+    top: -25px; 
+}
+
+input#q {
+    margin-bottom: 0;
+}
+
+div#rewards-program-wrapper {
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    top: 95px;
+    z-index: 1;
+}
+
+#soc{
+ display: inline-block; 
+}
+
+/*  initial  */
+#backorder-wrapper{
+    display: none;
+    visibility: hidden; 
+    opacity: 0;
+    transition: 0.5s;
+    border: 4px dashed #00abee;
+    padding: 20px 20px 0px 20px;
+    margin: 10px 0 15px;
+    width: 0%;
+    height: 0%;
+    text-align: center;
+    overflow: hidden;
+
+}
+
+#backorder-wrapper.visible{
+  display: inline-block !important; 
+  visibility: visible !important; 
+  padding: 20px 20px 0px 20px !important;
+  margin: 10px 0 15px !important;
+  opacity: 1 !important;
+  width: 100% !important; 
+}
+
+#backorder-wrapper.invisible{
+  opacity: 0 !important; 
+  height: 0 !important;
+  margin: 0px !important;
+  padding: 0px !important;
+  visibility: hidden !important; 
+  width: 0% !important; 
+}
+ 
+#backorder-wrapper h5{
+    text-transform: uppercase;
+    color: #F55E0D;
+}
+
+.unselected{
+  opacity: 0.5 !important;
+  display: inline-block !important;
+}
+
+.selected{
+  opacity: 1 !important;
+  display: inline-block !important;
+}
+
+
+
+
+
+/* 
+
+PRODUCT PAGE
+
+*/
+
+.carousel-container{
+  display: inline-flex;  
+}
+.controls{
+  clear:both;
+  margin: auto 5px;
+}
+.controls button{
+  background: #fff;
+  border:none;
+  color: #000;
+}
+
+#rewards-container{
+}
+
+#rewards-message{
+  display: inline-flex;  
+  margin-bottom: 10px;
+  text-align: justify;
+
+}
+
+#rewards-button{
+  
+  display: inline-flex;  
+  align-items: center;
+  background: #00ABEE;
+  color: #FFF;
+  width:100%;
+  height:50px;
+}
+
+#rewards-button a{
+  
+  display: inline-flex; 
+  align-items: center;
+  color: #FFF;  
+  width:100%;
+  height:100%;
+  text-align:center;
+  text-transform:uppercase;
+  letter-spacing: 6px;
+  text-decoration: none;
+
+}
+
+#rewards-button h1:hover{
+    margin:0px;
+}
+
+#free-gear{
+ 
+  display:block;
+  width:100%;
+  
+}
+
+
+/* 
+
+DECAL PAGE
+
+*/
+
+#decal-gallery {
+  padding-top:10px;
+}
+
+#menu-decal{
+  height:100%;
+  line-height:35px;
+
+}
+
+.decal-menu-option{
+  width:100%;
+  float:left;
+}
+
+li.decal-item.collectionitem {
+    position: relative;
+}
+
+
+
+
+  
+ 
+
+  
+
+/* 
+
+NAVIGATION
+
+*/
+
+
+#navigation i.fa.fa-star {
+    color: #F55E0D;
+}
+
+.rewards-star i{
+    -ms-transform: rotate(0deg); /* IE 9 */
+    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+    transform: rotate(0deg);
+    -webkit-transition: .5s;
+    transition: .5s;
+    color: #F55E0D;
+}
+
+
+.rewards-star:hover i{
+    -ms-transform: rotate(145deg); /* IE 9 */
+    -webkit-transform: rotate(145deg); /* Chrome, Safari, Opera */
+    transform: rotate(145deg);
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+
+#logo{
+ 	width: 75%;
+}
+
+#logo h1{
+ 	margin-left:40%; 
+}
+
+#points-balance{
+ 	float: right; 
+    text-decoration: none;
+    padding-top: 30px;
+}
+
+.sweettooth-points-balance{
+  color: #F55E0D;
+}
+
+/*
+
+COLLECTION
+
+*/
+.collection-description{
+
+  margin-bottom: 20px;
+  
+}
+
+.collection-products{
+  height:70px;
+}
+
+
+#sorting-hat{
+  
+  display: none;
+  
+}
+
+#paginate-bar{
+  
+  display: inline-flex;
+  align-items: center;
+  border-bottom: none !important;
+  
+}
+
+#pagination{
+  width:100%;
+}
+
+.pagination-bottom{
+  margin-bottom:50px; 
+}
+
+#pagination a {
+    margin: 0 5px;
+    background: #F55E0D;
+    padding: 2px 5px;
+    border-radius: 0;
+    padding: 10px 15px;
+    color: white;
+    font-weight: bold;
+}
+
+.current{
+ 
+  margin-left:10px;
+  margin-right:10px;
+
+  
+}
+
+.pagination-buttons{
+ margin-top:50px; 
+}
+/**************************************
+***************************************
+    Cart Page
+***************************************
+**************************************/
+
+input#add {
+      background: #f55e0d;
+}
+
+
+#product-description li.selected{
+    border: #f55e0d 1px solid !important;
+    background: #2884b6;
+    color: #fff;
+}
+
+
+
+
+
+/**************************************
+***************************************
+    MEDIA QUERIES
+***************************************
+**************************************/
+
+
+    @media (min-width: 863px){
+      .decal-item.collectionitem {
+          width:30% !important;
+      }
+    }
+
+    @media (min-width: 777px) and (max-width: 863px){
+      .decal-item.collectionitem {
+          width:30% !important;
+      }
+            
+    }
+
+    @media (max-width: 767px){
+        .decal-item{
+            width:181px !important;
+        }
+        #menu-decal .decal-menu-option {
+            width: 50% !important;
+        }  
+        .decal-item.collectionitem {
+            width: 50% !important;
+        } 
+      
+        #cart{
+         margin-bottom: 0px; 
+        }
+      
+        #points-balance{
+          padding-top: 0px;
+          text-align: center;
+          width: 100%;          
+        }
+      
+      	#logo{
+         width:100%;
+         margin-top:40px;
+        }
+      
+      	#logo h1{
+         margin-left: 0px; 
+        }
+      
+        div#rewards-program-wrapper{
+         display: none; 
+        }
+      
+        
+    }
+
+    @media(min-width: 768px){
+        #navigation>.primary>#nav {
+              display: inline-block;
+            } 
+    }

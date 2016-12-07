@@ -1,0 +1,129 @@
+{% if cart.item_count == 0 or customer.email == blank or customer.tags == blank %}
+{% else %}
+  <script>
+        function BuyXSubmit(buyx_cart, selector) {
+            for (var i = 0; i < buyx_cart.items.length; i++) {
+                var item = buyx_cart.items[i];
+                var sel = selector.replace("{variant_id}", item.variant_id);
+                //console.log(jQuery(sel).length)
+                if (jQuery(sel).length == 1) {
+                    if (jQuery(sel).val() != item.quantity) {
+                        alert("Please Update cart before checkout");
+                        return false
+                    }
+                }
+            }
+            return true
+        }
+
+        function SAWCartCheck(saw_cart, customer) {
+            var cart_selectors = ["#cartform", "#cart_form", "#cart-form"];
+
+            for (var i = 0, len = saw_cart.items.length; i < len; i++) {
+                delete saw_cart.items[i].image;
+                delete saw_cart.items[i].url;
+            }
+            var saw_shop_domain = "{{shop.permanent_domain}}"
+            jQuery.ajax({
+                cache: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                type: "POST",
+                url: 'https://sawholesale.herokuapp.com/api/v1/cart-check-discounts',
+                data: JSON.stringify({
+                    shop_slug: saw_shop_domain.replace(".myshopify.com", ""),
+                    cart: saw_cart,
+                  customer: customer
+                }),
+                success: function(res) {
+                  if (typeof SAWComplete == "function") {
+                    SAWComplete(res)
+                  }
+                  if (res.warning_note != "") {
+                    if (typeof SAWOrderNote == "function") {
+                      res.warning_note = SAWOrderNote(res.warning_note)
+                    }
+                    jQuery(".saw-discount-info").html(res.warning_note)
+                    jQuery(".saw-discount-info").removeClass("saw-hidden")
+                    jQuery("#note").val("")
+                    jQuery("textarea[name='note']").val("")
+                    return
+                  }
+
+                  var note = res.order_note
+                  if (typeof SAWOrderNote == "function") {
+                    note = SAWOrderNote(note)
+                  }
+                  if (note != "") {
+                    jQuery("#note").val(note)
+                    jQuery("textarea[name='note']").val(note)
+                  }
+
+                  if (typeof res.extra_note == "string") {
+                  	jQuery(".saw-extra-note").html(res.extra_note)
+                  }
+
+                  if (res.discount_value == 0) {
+                    if ((typeof jQuery("#note").val() == "string") && (jQuery("#note").val().indexOf("% Off")) > -1) {
+                      jQuery("#note").val("")
+                    }
+                    return
+                  }
+
+                  jQuery(".saw-cart-original-total").css("text-decoration", "line-through")
+                  jQuery(".saw-cart-total").html(res.saw_total_price_format)
+                  jQuery(".saw-discount-info").removeClass("saw-hidden")
+                  jQuery(".saw-discount-code").html(res.discount_code)
+
+                  jQuery("#discount").val(res.discount_code)
+                  /*cart_selectors.forEach(function(selector) {
+                    jQuery(selector).attr("action", "/cart?discount=" + res.discount_code)
+                  })*/
+
+                  if (res.tax_exemption) {
+                    jQuery("#saw-tax-countries").text(res.tax_exemption_countries)
+                    jQuery(".saw-tax-info").removeClass("saw-hidden")
+                    jQuery(".show-tax-info").on("click", function(e) {
+                      e.preventDefault();
+                      jQuery(".saw-tax-info-details").removeClass("saw-hidden")
+                    })
+                  }
+
+                }
+            })
+        }
+
+
+        window.saw_cart = {{cart | json}}
+        window.saw_cart.items = []
+        {% for item in cart.items %}
+          window.saw_cart.items.push({
+            product_id: {{item.product.id}},
+            variant_id: {{item.variant.id}},
+            product_title: "{{ item.product.title | escape }}",
+            variant_title: "{{ item.variant.title | escape }}",
+            quantity: {{item.quantity}},
+            price: {{item.variant.price}},
+            compare_at_price: {% if item.variant.compare_at_price == blank %} null {% else %} {{item.variant.compare_at_price}} {% endif %},
+            sawholesale: {{item.product.metafields.sawholesale | json}}
+          })
+        {% endfor %}
+        //console.log({{cart | json}})
+
+        SAWCartCheck(window.saw_cart, {id: {{customer.id}}, email: "{{customer.email | escape}}" })
+
+    //https://docs.shopify.com/manual/configuration/store-customization/page-specific/cart-page/how-do-i-limit-product-quantities-on-the-cart-page-so-that-customers-can-only-purchase-whats-in-stock
+    jQuery('[max]').change(function() {
+      var max = parseInt(jQuery(this).attr('max'), 10) || 10000;
+      var value = parseInt(jQuery(this).val(), 10) || 0;
+      if (value > max) { jQuery(this).val(max); }
+    });
+    /* change won't trigger on initial load */
+    jQuery('[max]').each(function() {
+      var max = parseInt(jQuery(this).attr('max'), 10) || 10000;
+      var value = parseInt(jQuery(this).val(), 10) || 0;
+      if (value > max) { jQuery(this).val(max); }
+    });
+
+  </script>
+{% endif %}

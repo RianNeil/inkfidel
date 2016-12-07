@@ -1,0 +1,69 @@
+
+<!-- spurit_po-added -->
+{% include 'spurit_po-product-snippet' %}
+<!-- /spurit_po-added -->
+
+<!-- Bold Duplicate And Hide{% if product.metafields.inventory.ShappifyHidden == "true" %}
+Whoops! Doesn't look like the product is available. Let us know and we'll help you out.
+{% break %}{% endif %}
+
+{% include 'buyx-product' with product %}
+{% include 'buyx-price-min' with product %} 
+
+
+{% include 'saw_compute_discount' with product %}
+
+<div id="richsnippet" style="display:none;visibility:hidden;">
+<div itemscope itemtype="http://data-vocabulary.org/Product">
+<span itemprop="brand">{{ product.vendor }}</span>
+  <span itemprop="name"><h1>{{ product.title | escape }}</h1></span>
+<img itemprop="image" src="{{ product.images[0] | product_img_url: "large" }}" />
+<span itemprop="description">{{ product.description }}</span>
+Category: <span itemprop="category" content="{{ product.type }}">{{ product.type }}</span>
+Product #: <span itemprop="identifier" content="sku:{{ product.variants[0].sku }}">{{ product.variants[0].sku }}</span>
+<span itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
+Regular price: {{ product.price | money }}
+<meta itemprop="currency" content="{{ shop.currency }}" />
+$<span itemprop="price">{{ product.price | money }}</span>
+Available from: <span itemprop="seller">{{ shop.url }}</span>
+{% if product.available == 'true' %}
+<span itemprop="availability" content="in_stock">In stock</span>
+{% endif %}
+</span>
+</div>
+</div> <!--end-->
+
+<script type="text/javascript">
+var google_tag_params = {
+ecomm_prodid: 'shopify_US_{{ product.id }}_{{ product.variants.first.id }}'
+ecomm_pagetype: 'shopify_US_{{ productpage }}'
+ecomm_totalvalue: 'shopify_US_{{ product.price_min | money_without_currency }}'
+};
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 956104739;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/956104739/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+
+
+
+<div id="sorted-products" class="eight columns alpha">
+
+	{% include 'product-sort' %}
+  
+</div>
+
+
+
+
