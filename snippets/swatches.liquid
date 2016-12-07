@@ -9,9 +9,9 @@
 .swatch ul { list-style-type:none; margin:0; padding:0; }
 .swatch li {
   /* Rounded corners */
-  -webkit-border-radius:2px;
-  -moz-border-radius:2px;
-  border-radius:2px;
+  -webkit-border-radius:0px;
+  -moz-border-radius:0px;
+  border-radius:0px;
   /* Cross-browser inline-block */
   display:-moz-inline-stack;
   display:inline-block;
@@ -26,7 +26,7 @@
   /* Fake that those are buttons, i.e. clicky */
   cursor:pointer;
   /* The border when the button is not selected */
-  border: #DDD 1px solid !important;
+  border: #06e921 1px solid !important;
   /* To position the sold out graphic and tooltip */
   position:relative;
   /* Text styling */
@@ -58,7 +58,7 @@
 /* Styling selected swatch */
 /* Darker border and slightly raised */
 .swatch li.selected {
-  border:#f55e0d 1px solid !important;
+  border:#06e921 1px solid !important;
   background: #2884b6;
   color: #fff;
   -webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.25);
@@ -195,8 +195,8 @@
             {% if variant.available and variant.inventory_quantity < 1%}
               <!--      make string based off options      -->
               {% capture variant_string %}{% if variant.option1 != blank %}{{ variant.option1 | handleize}}{% endif %}{% if variant.option2 != blank %}-{{ variant.option2 | handleize}}{% endif %}{% if variant.option3 != blank %}-{{ variant.option3 | handleize}}{% endif %},{% endcapture %}
-            <!--      add string to backorders     -->
-            {% capture backorders %}{{ backorders }}{{ variant_string }}{% endcapture %}
+              <!--      add string to backorders     -->
+              {% capture backorders %}{{ backorders }}{{ variant_string }}{% endcapture %}
             {% endif %}
           
              
@@ -217,9 +217,10 @@
 
                   <li id="{{ value | handleize  }}" 
                       variants="{{ variant.option1 | handleize }} {{ variant.option2 | handleize }} {{ variant.option3 | handleize  }}" 
-                      data-option-title="{{ value | escape }}" 
+                      data-option-title="{{ value | escape }}" option-category="{{ option_handle | handleize }}"
                       class="
-                             clickable-option {{ option_handle | handleize }}
+                             clickable-option 
+                             {{ option_handle | handleize }}
                              {{ value | handle }} 
                              {% if is_color %} 
                              	color 
@@ -276,10 +277,9 @@
 {% assign backorder_list = backorders | split: ',' %}
 
 <script>
-
-  //on DOM content loaded
+  console.log('this script is contained in swatches.liquid');
+  
   document.addEventListener("DOMContentLoaded", function(event) {
-    console.log('start');
     backorders = [];
     {% for word in backorder_list %}
       backorders.push('{{ word }}');
@@ -302,6 +302,13 @@
           var selected_string = ''
           
           for( k = 0; k < selected.length; k++ ){
+            //if another member of selected has same option as this.option, remove from list
+            //e.g. large, red, cotton are selected, client clicks medium, now medium, red, cotton are selected
+            if( selected[k].getAttribute('option-category') == this.getAttribute('option-category') && selected[k] != this ){
+              selected[k].classList.remove('selected');
+              continue;
+            }
+            
             selected_string = selected_string+selected[k].id+'-';
           }
           

@@ -1,0 +1,69 @@
+<table id="basket">
+    <thead>
+        <tr>
+            <th>Item Title</th>
+            <th>Price</th>
+            <th style="text-align: center">Qty</th>
+            <th>Delete</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+      {% for item in cart.items %}
+      		    
+          {% include 'saw_compute_discount' with item.product %}
+          {% include 'saw_variant' with item.variant %}
+          <tr>
+              <td>
+                  <p>
+                    <a class="product-title" href="{{ item.product.url }}">{{ item.title| remove: ' / Default' | remove: 'Default'  }}</a>
+                  </p>
+                  <p class="line-item-message">
+                    {{ item.message }}
+                  </p>
+                  {% if potential_bogo_products contains item.product_id  %}
+                    {% comment %}<p class="line-item-alert">{{settings.discounts_line_item_alert}}</p>{% endcomment %}
+                  {% endif %}
+              </td>
+              <td>
+                <p>
+
+                  {% if saw_discount == 1 %}
+                      {{ item.price | money }}{% if item.variant.compare_at_price > item.price %}<br /><del>{{ item.variant.compare_at_price | money }}</del>{% endif %}
+                  {% else %}
+                      {{ saw_variant_price | money }}<br>
+                      <del>{{ saw_variant_compare_at_price | money }}</del>
+
+                      <!-- line_price:
+                          {{saw_variant_price | times: item.quantity | money }}<br>
+                          <del>
+                              {{ saw_variant_compare_at_price  | times: item.quantity | money }}
+                          </del>
+                      -->
+                  {% endif %} 
+
+                </p>
+              </td>
+              <td>
+                <input class="input-update-id" type="text" size="4" name="updates[{{ item.id }}]" id="updates_{{ item.variant.id }}" value="{{ item.quantity }}" onfocus="this.select();"
+                {% unless item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %} max="{{ item.variant.inventory_quantity }}" {% endunless %}
+                />
+              </td>
+              <td>
+                 <a href="/cart/change/{{ item.key }}?quantity=0" >Remove Item</a>                
+              <td>
+
+                {% if saw_discount == 1 %}
+                  {{ item.line_price | money }}   
+                {% else %}
+                    {{saw_variant_price | times: item.quantity | money }}<br>
+                  <del>
+                    {{ saw_variant_compare_at_price  | times: item.quantity | money }}
+                  </del>
+                {% endif %} 
+
+              </td>
+          </tr>
+      {% endfor %}
+    </tbody>
+</table>

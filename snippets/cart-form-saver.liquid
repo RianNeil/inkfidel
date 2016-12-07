@@ -1,0 +1,35 @@
+<script>
+    /************************************
+    *************************************
+      Checks if user had previously input text
+      uploads on load, and saves on change
+    *************************************
+    *************************************/
+  
+    cartFormSaver = function( textArea_id ){
+      console.log('cart-form-saver');
+
+      var id = textArea_id;
+      if(id == '' ){
+        console.log('cart-form-saver: dom_id is empty '); 
+      }
+
+      var textArea = document.getElementById(id);
+
+
+      if( localStorage.getItem(id) != null ){
+         valueString = localStorage.getItem(id);
+         textArea.value = valueString;
+      }
+
+      
+
+      $('#'+id).on('change keyup paste', function() {
+        localStorage.setItem(id, textArea.value);
+      });
+  };
+
+  
+  cartFormSaver('{{ dom_id }}');
+ 
+</script>

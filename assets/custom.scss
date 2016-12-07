@@ -1,3 +1,59 @@
+/****************************************
+*****************************************
+	DISCOUNTS 
+*****************************************
+*****************************************/
+
+    .discounts-banner-wrapper {
+        padding: 15px 10px;
+        margin-bottom: 15px;
+    }
+    .discounts-banner-wrapper h2, h4{
+        color: #f55e0d !important; 
+    }
+
+    h2.discount-header.discount-title {
+        display: inline-block;
+        font-size: 32px;
+    }
+	h4.discount-header.discount-message {
+        display: inline-block;
+    }
+    h4.discount-header.discount-message {
+        font-size: 22px;
+    }
+	.product-title {
+        color: #F55E0D !important;
+    }
+	p.line-item-alert {
+        display: inline-block;
+        background: #f55e0d;
+        color: white;
+        padding: 5px;
+    }
+      
+	input#checkout {
+        background: #06e921;
+        text-transform: uppercase;
+        border-radius: 0;
+    }
+    button#paypal-express-button {
+        background: #ffc439 !important;
+    }
+    a.shopify-secure {
+        display: block;
+    }
+	.y-badge.yotpo-display-wrapper {
+        margin-left: 0 !important;
+    }
+	input#mc-embedded-subscribe {
+        background: #f55e0d;
+    }
+      
+    
+	
+
+
 /*
 Filter Menu
 */
@@ -90,34 +146,6 @@ i.check-icon {
     background-position: 0px -144px;
 }
 
-/*
-
-
-*/
-
-#product-description{
-  li.selected{
-    border: #f55e0d 1px solid !important;
-    background: #2884b6;
-    color: #fff;
-  }
-}
-
-
-@media
-(-webkit-min-device-pixel-ratio: 1.25),
-(min-resolution: 120dpi) {
-    i.check-icon {
-        /* Translate the @2x sprite's dimensions back to 1x */
-        background-size: 16px 96px;
-        background-position: 0px -30px;
-    }
-
-        .selected i.check-icon {
-        background-position: 0px 0px;
-    }
-} 
-
 .filter-menu .has_group_selected {
     display: inherit;  
 }
@@ -127,8 +155,108 @@ i.check-icon {
 }
 
 
-@media(max-width: 767px){
-    #collection-sidebar .dropdownwrap{
-     display: block; 
+
+/*==========================================
+============================================
+    PRODUCT PAGE
+============================================
+==========================================*/
+
+    .accordion li#two, li#four {
+        display: none !important;
     }
+
+    input#add {
+        background: #06e921 !important;
+        width: 100%;
+        border-radius: 0;
+        text-transform: uppercase;
+        border-radius: 0; 
+    }
+    .swatch li {
+        border-radius: 0 !important;
+        border: #06e921 1px solid !important;
+        border-color: #06e921 !important;       
+    }
+    .swatch li.selected {
+        border: #06e921 1px solid !important;
+        background: #06e921 !important;
+        border-color: #06e921 !important; 
+    }
+    img.petes-guarantee {
+        max-width: 150px;
+        margin-top: 15px;
+    }
+    #product-description input#add{
+     	transition: 0.3s; 
+    }
+    #product-description input#add:hover {
+        background: #00c017;
+    }
+
+/*==========================================
+============================================
+    CART
+============================================
+==========================================*/
+
+div#gift-note.hide {
+  display: none;
 }
+div#gift-note.show {
+  display: block;
+}
+#globalsign-cart-badge img {
+    width: 105px;
+}
+div#shopify-secure-cart-badge,div#globalsign-cart-badge {
+    display: inline-block;
+}
+button#paypal-express-button {
+    display: block;
+}
+
+
+
+/*==========================================
+============================================
+    FOOTER
+============================================
+==========================================*/
+
+    #footer i.fa {
+        font-size: 32px;
+        margin-right: 10px; 
+        opacity: .75; 
+    }
+
+    #footer i.fa:hover {
+        opacity: 1;
+    }
+
+/*==========================================
+============================================
+    MEDIA QUERIES
+============================================
+==========================================*/
+
+    @media
+    (-webkit-min-device-pixel-ratio: 1.25),
+    (min-resolution: 120dpi) {
+        i.check-icon {
+            /* Translate the @2x sprite's dimensions back to 1x */
+            background-size: 16px 96px;
+            background-position: 0px -30px;
+        }
+
+            .selected i.check-icon {
+            background-position: 0px 0px;
+        }
+    } 
+
+    @media(max-width: 767px){
+        #collection-sidebar .dropdownwrap{
+         display: block; 
+        }
+    }
+

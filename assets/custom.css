@@ -283,23 +283,6 @@ COLLECTION
 .pagination-buttons{
  margin-top:50px; 
 }
-/**************************************
-***************************************
-    Cart Page
-***************************************
-**************************************/
-
-input#add {
-      background: #f55e0d;
-}
-
-
-#product-description li.selected{
-    border: #f55e0d 1px solid !important;
-    background: #2884b6;
-    color: #fff;
-}
-
 
 
 

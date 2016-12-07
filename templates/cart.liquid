@@ -41,82 +41,117 @@ var google_remarketing_only = true;
 <div class="buyx-msg"></div>
 {% include 'buyx-cart' %}
 
-<form action="/cart" method="post" id="cartform">
-     <input type="hidden" name="discount" id="discount" value="" />
-
-	<table id="basket">
-    <thead>
-	    <tr>
-			<th>Item Title</th>
-			<th>Price</th>
-			<th style="text-align: center">Qty</th>
-			<th>Delete</th>
-			<th>Total</th>
-		</tr>
-    </thead>
-    <tbody>
-    {% for item in cart.items %}
-        {% include 'saw_compute_discount' with item.product %}
-        {% include 'saw_variant' with item.variant %}
-		<tr>
-			<td>
-				<p><a href="{{ item.product.url }}">{{ item.title| remove: ' / Default' | remove: 'Default'  }}</a></p>
-			</td>
-			<td><p>
-              
-              {% if saw_discount == 1 %}
-	          {{ item.price | money }}{% if item.variant.compare_at_price > item.price %}<br /><del>{{ item.variant.compare_at_price | money }}</del>{% endif %}
-              {% else %}
-                  {{ saw_variant_price | money }}<br>
-                  <del>{{ saw_variant_compare_at_price | money }}</del>
-
-                  <!-- line_price:
-                {{saw_variant_price | times: item.quantity | money }}<br>
-		<del>{{ saw_variant_compare_at_price  | times: item.quantity | money }}</del>
-                  -->
-              {% endif %} 
-
-              </p></td>
-			<td><input type="text" size="4" name="updates[{{ item.id }}]" id="updates_{{ item.variant.id }}" value="{{ item.quantity }}" onfocus="this.select();"
-                       
-{% unless item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %} max="{{ item.variant.inventory_quantity }}" {% endunless %}
-/></td>
-			<td><a href="#" onclick="remove_item({{ item.variant.id }}); return false;">Remove</a></td>
-			<td>
-              
-              {% if saw_discount == 1 %}
-	          {{ item.line_price | money }}   
-              {% else %}
-                {{saw_variant_price | times: item.quantity | money }}<br>
-		<del>{{ saw_variant_compare_at_price  | times: item.quantity | money }}</del>
-              {% endif %} 
-
-              </td>
-		</tr>{% endfor %}
-    </tbody>
-	</table>
-	<div id="basket-right">
-		<h3>Subtotal <span class="saw-cart-original-total">{{ cart.total_price | money }}</span><br>
-<span class="saw-cart-total"></span></h3>
-      
-<div style="text-align: right;">
-	<span class="saw-discount-info "></span>
-  	<span class="saw-extra-note "></span>
-</div>
-        <input type="submit" name="update" id="update-cart" value="Update" class="styled-button" />
-        <input type="submit" name="checkout" id="checkout" value="Secure Checkout" class="styled-button" />
-        <div class="clear"></div>
-      
-{% if customer.tags contains 'Wholesale' or customer.tags contains 'wholesale' %}
-{% else %}
-        {{ content_for_additional_checkout_buttons }}
+<!-- DISCOUNTS BANNERS  -->
+{% if settings.discounts_bogo50_enabled or settings.discounts_b3g1_enabled or settings.discounts_bogo50_and_b3g1_enabled %}
+  {% include 'cart-discount-banners'%}
 {% endif %}
 
 
-	</div>  
+<form action="/cart" method="post" id="cartform">
+     <input type="hidden" name="discount" id="discount" value="" />
+    <!--   DISCOUNTS TABLE   -->
+    {% if settings.discounts_bogo50_enabled or settings.discounts_b3g1_enabled or settings.discounts_bogo50_and_b3g1_enabled %}
+		{% include 'cart-discount-basket' %}
+  	{% else %}
+      <table id="basket">
+        <thead>
+            <tr>
+                <th>Item Title</th>
+                <th>Price</th>
+                <th style="text-align: center">Qty</th>
+                <th>Delete</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for item in cart.items %}
+              {% include 'saw_compute_discount' with item.product %}
+              {% include 'saw_variant' with item.variant %}
+              <tr>
+                  <td>
+                      <p><a class="first-class" href="{{ item.product.url }}">{{ item.title| remove: ' / Default' | remove: 'Default'  }}</a></p>
+                  </td>
+
+
+
+                  <td>
+                    <p>
+
+                      {% if saw_discount == 1 %}
+                      {{ item.price | money }}{% if item.variant.compare_at_price > item.price %}<br /><del>{{ item.variant.compare_at_price | money }}</del>{% endif %}
+                      {% else %}
+                          {{ saw_variant_price | money }}<br>
+                          <del>{{ saw_variant_compare_at_price | money }}</del>
+
+                          <!-- line_price:
+                        {{saw_variant_price | times: item.quantity | money }}<br>
+                <del>{{ saw_variant_compare_at_price  | times: item.quantity | money }}</del>
+                          -->
+                      {% endif %} 
+
+                    </p>
+                  </td>
+                  <td>
+                    <input type="text" size="4" name="updates[{{ item.id }}]" id="updates_{{ item.variant.id }}" value="{{ item.quantity }}" onfocus="this.select();"
+                    {% unless item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %} max="{{ item.variant.inventory_quantity }}" {% endunless %}
+                    />
+                  </td>
+                  <td>
+                    <a class="second-remove" href="#" onclick="remove_item({{ item.variant.id }}); return false;">Remove</a></td>
+                  <td>
+
+                    {% if saw_discount == 1 %}
+                      {{ item.line_price | money }}   
+                    {% else %}
+                        {{saw_variant_price | times: item.quantity | money }}<br>
+                      <del>
+                        {{ saw_variant_compare_at_price  | times: item.quantity | money }}
+                      </del>
+                    {% endif %} 
+
+                  </td>
+              </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+	<div id="basket-right">
+      <input type="submit" name="update" style="float:left;" id="update-cart" value="Update" class="styled-button" />
+      <h3>Subtotal <span class="saw-cart-original-total">{{ cart.total_price | money }}</span>
+      <span class="saw-cart-total"></span>
+      </h3>
+
+      <div style="text-align: right;">
+          <span class="saw-discount-info "></span>
+          <span class="saw-extra-note "></span>
+      </div>
+              {% comment %}<input type="submit" name="update" id="update-cart" value="Update" class="styled-button" />{% endcomment %}
+              <input type="submit" name="checkout" id="checkout" value="Secure Checkout" class="styled-button" />
+              <div class="clear"></div>
+
+      {% if customer.tags contains 'Wholesale' or customer.tags contains 'wholesale' %}
+      {% else %}
+              {{ content_for_additional_checkout_buttons }}
+      {% endif %}
+
+      <div id="shopify-secure-cart-badge">
+          <img src="//cdn.shopify.com/s/images/badges/shopify-secure-badge-dark-shadow.png" alt="Shopify secure badge" />
+      </div>
+      <div id="globalsign-cart-badge">
+          <img src="{{ 'globalsign-image.png' | asset_url }}" alt="Globalsign secure badge" />
+      </div>
+      
+  </div> 
+
   
+  
+{% include 'gift-wrapping' %}
+<hr>
+<h4>Additional Instructions for Processing</h4>
+<textarea id="additional-instructions-for-processing" name="note"></textarea>
+{% include 'cart-form-saver', dom_id: 'additional-instructions-for-processing'%}
 
-
+  
 </form>{% endif %}
 {% if settings.show_recent_products %}
 {% include 'recently-viewed' %}

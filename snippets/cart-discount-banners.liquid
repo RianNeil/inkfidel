@@ -1,0 +1,58 @@
+{% assign already_bogod_products = '' %}
+{% assign potential_bogo_products = '' %}
+
+<!--  GET ALL ITEMS THAT ARE ALREADY BOGO'D  -->
+{% for item in cart.items %}
+    <!-- if item has a message then it has been BOGO'd-->
+    {% if item.message !=''  %}
+        <!--   add product title to array of product titles for which a bogo has already been applied     -->
+            {% capture already_bogod_products %}
+                 {{ already_bogod_products }} {{ item.product_id }} 
+            {% endcapture %}
+    {% endif %}
+{% endfor %}
+
+<!--  FIND ITEMS THAT COULD BE BOGO'D  -->
+{% for item in cart.items %}
+	{% if item.product.tags contains 'apparel'%}
+		{% if already_bogod_products contains item.product_id %}
+          <!-- do nothing -->
+		{%else%}
+            <!-- 	captured potential_bogo		 -->
+            {% capture potential_bogo_products %}
+                 {{ potential_bogo_products }} {{ item.product_id }} 
+            {% endcapture %}
+		{% endif %}
+	{% endif %}
+{% endfor %}
+
+<!-- IF NO BOGO'D PRODUCTS OR POTENTIAL UPSELLS -->
+{% if potential_bogo_products == '' and already_bogod_products == ''%}
+	{% assign display_banner = false %}
+{% else %}
+	{% assign display_banner = true%}
+{% endif %}
+
+{% comment %}
+    display banner: {{display_banner}}<br>
+    potential_bogo_products: {{ potential_bogo_products }}<br>
+    already_bogod_products: {{already_bogod_products}}<br>
+{% endcomment %}
+
+<div class="discounts-banner-wrapper" style="{% if display_banner %}display: block; {% else %} display: none !important;{% endif %}">
+  
+  <!--  if there are products to upsell  -->
+  {% if potential_bogo_products != '' %}
+    <h2 class="discount-header discount-title">{{ settings.discounts_banner_title}}</h2>
+    <h4 class="discount-header discount-message">{{settings.discounts_banner_message}}</h4>
+  {% endif %}
+ 
+  {% comment %}
+    <!--  if bogo'd products exist, and none more to upsell  -->
+    {% if potential_bogo_products == '' and already_bogod_products != ''%}
+      <h2 class="discount-header discount-title">{{ settings.discounts_completion_banner_title}}</h2>
+      <h4 class="discount-header discount-message">{{settings.discounts_completion_banner_message}}</h4>
+    {% endif %}
+  {% endcomment %}
+  
+</div>

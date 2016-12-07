@@ -11,6 +11,8 @@
   <!--- Fav Icon --->
   
   <link rel="shortcut icon" href="{{ 'Inkfidel_Logo.png' | asset_url }}" type="image/png" >
+ 
+  
   
   <meta name="google-site-verification" content="VZSYY7Ue7MXxY7DI246FyP1B9EaOZ0h1WMJf5DLZfa4" />
 
@@ -22,6 +24,7 @@
   ================================================== -->
 
    <link href='//fonts.googleapis.com/css?family=Droid+Sans|Arvo|Playfair+Display|Lora|PT+Sans+Narrow|Ubuntu|PT+Serif|Lobster|Rokkitt|Copse|Antic|Dynalight|Droid+Serif|Open+Sans|Raleway:300|Bentham|Playball|Merriweather|Oswald' rel='stylesheet' type='text/css'>
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     
     <!-- Basic Page Needs
   ================================================== -->
@@ -76,7 +79,7 @@
     
     ================================================= -->
     
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     {{ 'theme.js' | asset_url | script_tag }}
     {{ 'jquery.colorbox.js' | asset_url | script_tag }}
@@ -98,6 +101,8 @@
     <!-- Favicons
 	================================================== -->
   <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}">
+  
+  
   
   
 <script>(function() {
@@ -192,7 +197,7 @@ src="https://www.facebook.com/tr?id=1773752076185181&ev=PageView&noscript=1"
 
  </head>
 
-<body>
+<body class="template-{{ template }}">
   
 <!-- Google Tag Manager -->
 <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TMTW26"
@@ -249,7 +254,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 </div>
       <!--big banner--->
-  
+
 
     {% if settings.search-check %}    
     <div id="search">
@@ -257,6 +262,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <input type="text" name="q" id="q" class="search-field" placeholder="search..." />
                 <input type="image" src="{{ 'btn-search.png' | asset_url }}" class="search-button" name="search-button" id="seek" />
             </form>
+      
     </div>
     {% endif %}
         <!-- banner below logo
@@ -266,8 +272,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <div class="clear"></div>
   </div>
-    <a href="https://inkfidel.com/products/freedom-fleece-dd-form-214-blanket"><img src="{{ 'fleece-sale-banner.jpg' | asset_url }}" alt="{{ shop.name }}" style="border: 0;" class="scale-with-grid"/></a>
-  <div id="navigation" class="sixteen columns">
+    
+     <a href="https://inkfidel.com/products/freedom-fleece-dd-form-214-blanket"><img src="{{ 'fleece-sale-banner.jpg' | asset_url }}" alt="{{ shop.name }}" style="border: 0;" class="scale-with-grid"/></a>
+    
+    <div id="navigation" class="sixteen columns">
           <nav class="primary">
                <ul id="nav">
                 {% for link in linklists.main-menu.links %}
@@ -393,21 +401,15 @@ $(document).ready(function() {
 <div id="footer">
     <div class="container">
         <ul id="big-footer" class="sixteen columns">
+            
+            <li class="four columns">
+				 <div id="y-badges" class="yotpo yotpo-badge badge-init">&nbsp;</div>           
+            </li>
+          
             <div class="four columns alpha">
                 <h4>About Us</h4>
                 <p>{{ settings.footer_text }}</p>
             </div>
-
-            <li class="four columns">
-                <h4>Recent News</h4>
-                {% for article in blogs.[settings.homepage-blog].articles limit: 3 %}
-                    <ul>
-                        <li>
-                            <a href="{{article.url}}">{{ article.title }}</a>
-                        </li>
-                    </ul>
-                {% endfor %}                
-            </li>
             
             <li class="four columns">
                 <h4>Navigation</h4>
@@ -420,19 +422,19 @@ $(document).ready(function() {
             
             <li class="four columns omega">
                 <h4>Connect</h4>
-                {% if settings.show_facebook %}<a href="{{ settings.facebook_url }}"><img width="32px" height="32px" src="{{ 'Facebook_logo_100p_icon.png' | asset_url }}" srcset="{{ 'Facebook_logo_100p.png' | asset_url }} 2x"></a>{% endif %}
-                {% if settings.show_twitter %}<a href="http://www.twitter.com/{{ settings.twittername }}"><img width="32px" height="26px" src="{{ 'twitter_logo_100p_icon.png' | asset_url }}" srcset="{{ 'twitter_logo_100p.png' | asset_url }} 2x"></a>{% endif %}
-                {% if settings.show_pinterest %} <a href="{{ settings.pinterest_url }}"><img width="32px" height="32px" src="{{ 'Pinterest.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_facebook %}<a href="{{ settings.facebook_url }}"><i class="fa fa-facebook-official" aria-hidden="true"></i>{% comment %}<img width="32px" height="32px" src="{{ 'Facebook_logo_100p_icon.png' | asset_url }}" srcset="{{ 'Facebook_logo_100p.png' | asset_url }} 2x">{% endcomment %}</a>{% endif %}
+                {% if settings.show_twitter %}<a href="http://www.twitter.com/{{ settings.twittername }}"><i class="fa fa-twitter" aria-hidden="true"></i>{% comment %}<img width="32px" height="26px" src="{{ 'twitter_logo_100p_icon.png' | asset_url }}" srcset="{{ 'twitter_logo_100p.png' | asset_url }} 2x">{% endcomment %}</a>{% endif %}
+                {% if settings.show_pinterest %} <a href="{{ settings.pinterest_url }}"><i class="fa fa-pinterest" aria-hidden="true"></i>{% comment %}<img width="32px" height="32px" src="{{ 'Pinterest.png' | asset_url }}">{% endcomment %}</a>{% endif %}
                 {% if settings.show_tumblr %} <a href="{{ settings.tumblr_url }}"><img src="{{ 'Tumblr.png' | asset_url }}"></a>{% endif %}
                 {% if settings.show_flickr %} <a href="{{ settings.flickr_url }}"><img src="{{ 'Flickr.png' | asset_url }}"></a>{% endif %}
                 {% if settings.show_youtube %} <a href="{{ settings.youtube_url }}"><img src="{{ 'YouTube.png' | asset_url }}"></a>{% endif %}
-                {% if settings.show_googleplus %} <a href="{{ settings.googleplus_url }}"><img width="33px" height="32px" src="{{ 'GooglePlus.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_googleplus %} <a href="{{ settings.googleplus_url }}"><i class="fa fa-google-plus-official" aria-hidden="true"></i>{% comment %}<img width="33px" height="32px" src="{{ 'GooglePlus.png' | asset_url }}">{% endcomment %}</a>{% endif %}
                 {% if settings.show_vimeo %} <a href="{{ settings.vimeo_url }}"><img src="{{ 'Vimeo.png' | asset_url }}"></a>{% endif %}
                 {% if settings.show_rss %} <a href="http://rutherford-romaguera2611.myshopify.com/blogs/{{ settings.homepage-blog }}.atom"><img src="{{ 'Feed.png' | asset_url }}"></a>{% endif %}
                 {% if settings.show_blogger %} <a href="{{ settings.blogger_url }}"><img src="{{ 'Blogger.png' | asset_url }}"></a>{% endif %}
                 {% if settings.show_linkedin %} <a href="{{ settings.linkedin_url }}"><img src="{{ 'LinkedIn.png' | asset_url }}"></a>{% endif %}
                 {% if settings.show_lastfm %} <a href="{{ settings.lastfm_url }}"><img src="{{ 'Last.fm.png' | asset_url }}"></a>{% endif %}
-                {% if settings.show_instagram %} <a href="{{ settings.instagram_url }}"><img width="33px" height="33px" src="{{ 'instagram.png' | asset_url }}"></a>{% endif %}
+                {% if settings.show_instagram %} <a href="{{ settings.instagram_url }}"><i class="fa fa-instagram" aria-hidden="true"></i>{% comment %}<img width="33px" height="33px" src="{{ 'instagram.png' | asset_url }}">{% endcomment %}</a>{% endif %}
           		{% include 'mailing' %}  
           </li>  
         </ul>
@@ -684,6 +686,10 @@ var google_remarketing_only = true;
 {% endif %}
 <!-- Power Tools view count code -->
   
+  
+
+  
+
   {% include 'sweettooth-initializer' %}
 
   {% include 'sweettooth-tab-widget' %}
